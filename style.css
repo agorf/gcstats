@@ -1,0 +1,33 @@
+body {
+    font-family: sans-serif;
+}
+
+table {
+    border: 1px solid #ddd;
+    margin-bottom: 1em;
+}
+
+caption {
+    background-color: #ddd;
+    font-weight: bold;
+}
+
+th {
+    background-color: #ddd;
+}
+
+caption, th, td {
+    padding: 3px 5px;
+}
+
+.l {
+    text-align: left;
+}
+
+.c {
+    text-align: center;
+}
+
+.r {
+    text-align: right;
+}
