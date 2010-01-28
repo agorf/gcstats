@@ -12,8 +12,14 @@ if fn.nil?
   exit 1
 end
 
-gpx_fn = File.basename(fn, '.zip') + '.gpx'
-data = Zip::ZipFile.open(fn).read(gpx_fn)
+data = nil
+
+Zip::ZipFile.foreach(fn) {|entry|
+  if File.extname(entry.name) == '.gpx'
+    data = entry.get_input_stream.read
+    break
+  end
+}
 
 wpts = Waypoint.parse(data)
 caches = wpts.map {|w| w.cache }
