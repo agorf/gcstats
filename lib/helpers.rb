@@ -35,11 +35,8 @@ module Helpers
 
   def most_finds_in_a_day
     n_finds = finds_by_date.values.max
-
-    date = finds_by_date.select {|d, f|
-      f == n_finds
-    }.map {|d, f| d.strftime('%Y-%m-%d') }.sort.join(', ')
-
+    date = finds_by_date.select {|d, f| f == n_finds }.map {|d, f|
+      d.to_s }.sort.join(', ')
     [n_finds, date]
   end
 
