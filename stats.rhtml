@@ -105,7 +105,7 @@
 <tr>
 <th>D/T</th>
 <% (0..8).each {|i| %>
-<th><%= ((i + 2) / 2.0).to_s.sub('.0', '') %></th>
+<th style="width: 35px"><%= ((i + 2) / 2.0).to_s.sub('.0', '') %></th>
 <% } %>
 <th>Total</th>
 </tr>
@@ -115,15 +115,15 @@
 <% (0..8).each {|j| %>
 <td><%= difficulty_terrain_combinations[i][j] %></td>
 <% } %>
-<td><%= difficulty_terrain_combinations[i].inject {|a, e| a + e } %></td>
+<td class="hl"><%= difficulty_terrain_combinations[i].inject {|a, e| a + e } %></td>
 </tr>
 <% } %>
 <tr>
 <th>Total</th>
 <% (0..8).each {|i| %>
-<td><%= difficulty_terrain_combinations.inject(0) {|a, e| a + e[i] } %></td>
+<td class="hl"><%= difficulty_terrain_combinations.inject(0) {|a, e| a + e[i] } %></td>
 <% } %>
-<td><%= total_finds %></td>
+<td class="hl b"><%= total_finds %></td>
 </tr>
 </table>
 <!-- }}} -->
@@ -140,19 +140,19 @@
 </tr>
 <% (0..11).each {|i| %>
 <tr>
-<th><%= Time::RFC2822_MONTH_NAME[i] %></th>
+<th><%= Date::ABBR_MONTHNAMES[i + 1] %></th>
 <% (0..30).each {|j| %>
 <td><%= (n = month_day_combinations[i][j]) < 0 ? '-' : n %></td>
 <% } %>
-<td><%= month_day_combinations[i].inject {|a, e| a + [e, 0].max } %></td>
+<td class="hl"><%= month_day_combinations[i].inject {|a, e| a + [e, 0].max } %></td>
 </tr>
 <% } %>
 <tr>
 <th>Total</th>
 <% (0..30).each {|i| %>
-<td><%= month_day_combinations.inject(0) {|a, e| a + [e[i], 0].max } %></td>
+<td class="hl"><%= month_day_combinations.inject(0) {|a, e| a + [e[i], 0].max } %></td>
 <% } %>
-<td><%= total_finds %></td>
+<td class="hl b"><%= total_finds %></td>
 </tr>
 </table>
 <!-- }}} -->
