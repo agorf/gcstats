@@ -53,7 +53,7 @@
 <th>Finds</th>
 <th>Percentage</th>
 </tr>
-<% finds_by_year.keys.sort.each {|year| %>
+<% finds_by_year.keys.sort.reverse.each {|year| %>
 <tr>
 <td><%= year %></td>
 <td class="r"><%= finds = finds_by_year[year] %></td>
