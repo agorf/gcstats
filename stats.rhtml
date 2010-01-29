@@ -1,177 +1,177 @@
 <html>
 <head>
-<title><%= geocacher_name %>'s Geocaching Stats</title>
-<link type="text/css" rel="stylesheet" href="style.css" media="screen" />
+  <title><%= geocacher_name %>'s Geocaching Stats</title>
+  <link type="text/css" rel="stylesheet" href="style.css" media="screen" />
 </head>
 <body>
 
 <!-- {{{ cache finds -->
 <table>
-<caption>Cache Finds</caption>
-<tr>
-<th class="l">Total</th>
-<td><%= total_finds %></td>
-</tr>
-<tr>
-<th class="l">Archived</th>
-<td><%= total_archived %></td>
-</tr>
-<tr>
-<th class="l">Caches/Day</th>
-<td><%= finds_per_day %></td>
-</tr>
-<tr>
-<th class="l">Most in one day</th>
-<td><%= '%d (%s)' % most_finds_in_a_day %></td>
-</tr>
+  <caption>Cache Finds</caption>
+  <tr>
+    <th class="l">Total</th>
+    <td><%= total_finds %></td>
+  </tr>
+  <tr>
+    <th class="l">Archived</th>
+    <td><%= total_archived %></td>
+  </tr>
+  <tr>
+    <th class="l">Caches/Day</th>
+    <td><%= finds_per_day %></td>
+  </tr>
+  <tr>
+    <th class="l">Most in one day</th>
+    <td><%= '%d (%s)' % most_finds_in_a_day %></td>
+  </tr>
 </table>
 <!-- }}} -->
 
 <!-- {{{ finds by day of week -->
 <table>
-<caption>Finds by Day of Week</caption>
-<tr>
-<th>Day</th>
-<th>Finds</th>
-<th>Percentage</th>
-</tr>
-<% finds_by_day_of_week.each_with_index {|finds, i| %>
-<tr>
-<td><%= DAY_NAME[i] %></td>
-<td class="r"><%= finds %></td>
-<td class="r"><%= (finds / total_finds.to_f * 100).round_with_precision(1) %>%</td>
-</tr>
-<% } %>
+  <caption>Finds by Day of Week</caption>
+  <tr>
+    <th>Day</th>
+    <th>Finds</th>
+    <th>Percentage</th>
+  </tr>
+  <% finds_by_day_of_week.each_with_index {|finds, i| %>
+    <tr>
+      <td><%= DAY_NAME[i] %></td>
+      <td class="r"><%= finds %></td>
+      <td class="r"><%= (finds / total_finds.to_f * 100).round_with_precision(1) %>%</td>
+    </tr>
+  <% } %>
 </table>
 <!-- }}} -->
 
 <!-- {{{ finds by year -->
 <table>
-<caption>Finds by Year</caption>
-<tr>
-<th>Year</th>
-<th>Finds</th>
-<th>Percentage</th>
-</tr>
-<% finds_by_year.keys.sort.reverse.each {|year| %>
-<tr>
-<td><%= year %></td>
-<td class="r"><%= finds = finds_by_year[year] %></td>
-<td class="r"><%= (finds / total_finds.to_f * 100).round_with_precision(1) %>%</td>
-</tr>
-<% } %>
+  <caption>Finds by Year</caption>
+  <tr>
+    <th>Year</th>
+    <th>Finds</th>
+    <th>Percentage</th>
+  </tr>
+  <% finds_by_year.keys.sort.reverse.each {|year| %>
+    <tr>
+      <td><%= year %></td>
+      <td class="r"><%= finds = finds_by_year[year] %></td>
+      <td class="r"><%= (finds / total_finds.to_f * 100).round_with_precision(1) %>%</td>
+    </tr>
+  <% } %>
 </table>
 <!-- }}} -->
 
 <!-- {{{ finds by container size -->
 <table>
-<caption>Finds by Container Size</caption>
-<tr>
-<th>Size</th>
-<th>Finds</th>
-<th>Percentage</th>
-</tr>
-<% finds_by_size.each {|size, finds| %>
-<tr>
-<td><%= size %></td>
-<td class="r"><%= finds %></td>
-<td class="r"><%= (finds / total_finds.to_f * 100).round_with_precision(1) %>%</td>
-</tr>
-<% } %>
+  <caption>Finds by Container Size</caption>
+  <tr>
+    <th>Size</th>
+    <th>Finds</th>
+    <th>Percentage</th>
+  </tr>
+  <% finds_by_size.each {|size, finds| %>
+    <tr>
+      <td><%= size %></td>
+      <td class="r"><%= finds %></td>
+      <td class="r"><%= (finds / total_finds.to_f * 100).round_with_precision(1) %>%</td>
+    </tr>
+  <% } %>
 </table>
 <!-- }}} -->
 
 <!-- {{{ finds by cache type -->
 <table>
-<caption>Finds by Cache Type</caption>
-<tr>
-<th>Type</th>
-<th>Finds</th>
-<th>Percentage</th>
-</tr>
-<% finds_by_type.each {|type, finds| %>
-<tr>
-<td><%= type %></td>
-<td class="r"><%= finds %></td>
-<td class="r"><%= (finds / total_finds.to_f * 100).round_with_precision(1) %>%</td>
-</tr>
-<% } %>
+  <caption>Finds by Cache Type</caption>
+  <tr>
+    <th>Type</th>
+    <th>Finds</th>
+    <th>Percentage</th>
+  </tr>
+  <% finds_by_type.each {|type, finds| %>
+    <tr>
+      <td><%= type %></td>
+      <td class="r"><%= finds %></td>
+      <td class="r"><%= (finds / total_finds.to_f * 100).round_with_precision(1) %>%</td>
+    </tr>
+  <% } %>
 </table>
 <!-- }}} -->
 
 <!-- {{{ difficulty/terrain combinations -->
 <table class="c">
-<caption>Difficulty/Terrain Combinations</caption>
-<tr>
-<th>D/T</th>
-<% (0..8).each {|i| %>
-<th style="width: 35px"><%= ((i + 2) / 2.0).to_s.sub('.0', '') %></th>
-<% } %>
-<th>Total</th>
-</tr>
-<% (0..8).each {|i| %>
-<tr>
-<th><%= ((i + 2) / 2.0).to_s.sub('.0', '') %></th>
-<% (0..8).each {|j| %>
-<td><%= difficulty_terrain_combinations[i][j] %></td>
-<% } %>
-<td class="hl"><%= difficulty_terrain_combinations[i].inject {|a, e| a + e } %></td>
-</tr>
-<% } %>
-<tr>
-<th>Total</th>
-<% (0..8).each {|i| %>
-<td class="hl"><%= difficulty_terrain_combinations.inject(0) {|a, e| a + e[i] } %></td>
-<% } %>
-<td class="hl b"><%= total_finds %></td>
-</tr>
+  <caption>Difficulty/Terrain Combinations</caption>
+  <tr>
+    <th>D/T</th>
+    <% (0..8).each {|i| %>
+      <th style="width: 35px"><%= ((i + 2) / 2.0).to_s.sub('.0', '') %></th>
+    <% } %>
+    <th>Total</th>
+  </tr>
+  <% (0..8).each {|i| %>
+    <tr>
+      <th><%= ((i + 2) / 2.0).to_s.sub('.0', '') %></th>
+      <% (0..8).each {|j| %>
+        <td><%= difficulty_terrain_combinations[i][j] %></td>
+      <% } %>
+      <td class="hl"><%= difficulty_terrain_combinations[i].inject {|a, e| a + e } %></td>
+    </tr>
+  <% } %>
+  <tr>
+    <th>Total</th>
+    <% (0..8).each {|i| %>
+      <td class="hl"><%= difficulty_terrain_combinations.inject(0) {|a, e| a + e[i] } %></td>
+    <% } %>
+    <td class="hl b"><%= total_finds %></td>
+  </tr>
 </table>
 <!-- }}} -->
 
 <!-- {{{ month/day combinations -->
 <table class="c">
-<caption>Month/Day Combinations</caption>
-<tr>
-<th>M/D</th>
-<% (1..31).each {|i| %>
-<th><%= '%02d' % i %></th>
-<% } %>
-<th>Total</th>
-</tr>
-<% (0..11).each {|i| %>
-<tr>
-<th><%= Date::ABBR_MONTHNAMES[i + 1] %></th>
-<% (0..30).each {|j| %>
-<td><%= (n = month_day_combinations[i][j]) < 0 ? '-' : n %></td>
-<% } %>
-<td class="hl"><%= month_day_combinations[i].inject {|a, e| a + [e, 0].max } %></td>
-</tr>
-<% } %>
-<tr>
-<th>Total</th>
-<% (0..30).each {|i| %>
-<td class="hl"><%= month_day_combinations.inject(0) {|a, e| a + [e[i], 0].max } %></td>
-<% } %>
-<td class="hl b"><%= total_finds %></td>
-</tr>
+  <caption>Month/Day Combinations</caption>
+  <tr>
+    <th>M/D</th>
+    <% (1..31).each {|i| %>
+      <th><%= '%02d' % i %></th>
+    <% } %>
+    <th>Total</th>
+  </tr>
+  <% (0..11).each {|i| %>
+    <tr>
+      <th><%= Date::ABBR_MONTHNAMES[i + 1] %></th>
+      <% (0..30).each {|j| %>
+        <td><%= (n = month_day_combinations[i][j]) < 0 ? '-' : n %></td>
+      <% } %>
+      <td class="hl"><%= month_day_combinations[i].inject {|a, e| a + [e, 0].max } %></td>
+    </tr>
+  <% } %>
+  <tr>
+    <th>Total</th>
+    <% (0..30).each {|i| %>
+      <td class="hl"><%= month_day_combinations.inject(0) {|a, e| a + [e[i], 0].max } %></td>
+    <% } %>
+    <td class="hl b"><%= total_finds %></td>
+  </tr>
 </table>
 <!-- }}} -->
 
 <!-- {{{ finds by country -->
 <table>
-<caption>Finds by Country</caption>
-<tr>
-<th>Country</th>
-<th>Finds</th>
-<th>Percentage</th>
-</tr>
-<% finds_by_country.sort {|x, y| y[1] <=> x[1] }.each {|country, finds| %>
-<tr>
-<td><%= country %></td>
-<td class="r"><%= finds %></td>
-<td class="r"><%= (finds / total_finds.to_f * 100).round_with_precision(1) %>%</td>
-</tr>
-<% } %>
+  <caption>Finds by Country</caption>
+  <tr>
+    <th>Country</th>
+    <th>Finds</th>
+    <th>Percentage</th>
+  </tr>
+  <% finds_by_country.sort {|x, y| y[1] <=> x[1] }.each {|country, finds| %>
+    <tr>
+      <td><%= country %></td>
+      <td class="r"><%= finds %></td>
+      <td class="r"><%= (finds / total_finds.to_f * 100).round_with_precision(1) %>%</td>
+    </tr>
+  <% } %>
 </table>
 <!-- }}} -->
 
