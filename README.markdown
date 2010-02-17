@@ -9,7 +9,7 @@ Samples: [my stats][agorf], [yannisp stats][yannisp] (fellow geocacher)
 
 ## Use ##
 
-Visit the [Pocket Queries][pq] page and click the _Add to Queue_ button (under _My Finds_).  Wait a while and check your email: you should have a pocket query file emailed to you with your finds.
+Visit the [Pocket Queries][pq] page and click the _Add to Queue_ button (under _My Finds_).  Wait a while and check your email: you should have a Pocket Query file emailed to you with your finds.
 
 Assuming your Pocket Query file is _3627915.zip_, issue:
 
