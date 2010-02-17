@@ -95,9 +95,9 @@ module Helpers
         end
       }
 
-      # fill empty years with with 0
-      (finds.keys.min..finds.keys.max).each {|year|
-        finds[year] = 0 if finds[year].nil?
+      # fill empty years with 0
+      (finds.keys.min + 1...finds.keys.max).each {|year|
+        finds[year] ||= 0
       }
 
       finds
