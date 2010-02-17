@@ -5,21 +5,25 @@ require 'zip/zip'
 require 'lib/mapping'
 require 'lib/template'
 
-fn = ARGV[0] || Dir.glob('*.zip')[0]
+fn = ARGV[0]
 
 if fn.nil?
   $stderr.puts "usage: #$0 <file>"
   exit 1
 end
 
-data = nil
+if File.extname(fn) == '.zip'
+  data = nil
 
-Zip::ZipFile.foreach(fn) {|entry|
-  if File.extname(entry.name) == '.gpx'
-    data = entry.get_input_stream.read
-    break
-  end
-}
+  Zip::ZipFile.foreach(fn) {|entry|
+    if File.extname(entry.name) == '.gpx'
+      data = entry.get_input_stream.read
+      break
+    end
+  }
+else
+  data = File.read(fn)
+end
 
 wpts = Waypoint.parse(data)
 caches = wpts.map {|w| w.cache }
