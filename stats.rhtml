@@ -7,7 +7,7 @@
 </head>
 <body>
 
-<!-- {{{ cache finds -->
+<%# {{{ cache finds %>
 <table>
   <caption>Cache Finds</caption>
   <tr>
@@ -27,9 +27,9 @@
     <td><%= '%d (%s)' % most_finds_in_a_day %></td>
   </tr>
 </table>
-<!-- }}} -->
+<%# }}} %>
 
-<!-- {{{ finds by day of week -->
+<%# {{{ finds by day of week %>
 <table id="finds_by_day_of_week">
   <caption>Finds by Day of Week</caption>
   <tr>
@@ -45,9 +45,9 @@
     </tr>
   <% } %>
 </table>
-<!-- }}} -->
+<%# }}} %>
 
-<!-- {{{ finds by year -->
+<%# {{{ finds by year %>
 <table id="finds_by_year">
   <caption>Finds by Year</caption>
   <tr>
@@ -63,9 +63,9 @@
     </tr>
   <% } %>
 </table>
-<!-- }}} -->
+<%# }}} %>
 
-<!-- {{{ finds by container size -->
+<%# {{{ finds by container size %>
 <table>
   <caption>Finds by Container Size</caption>
   <tr>
@@ -81,9 +81,9 @@
     </tr>
   <% } %>
 </table>
-<!-- }}} -->
+<%# }}} %>
 
-<!-- {{{ finds by cache type -->
+<%# {{{ finds by cache type %>
 <table>
   <caption>Finds by Cache Type</caption>
   <tr>
@@ -99,9 +99,9 @@
     </tr>
   <% } %>
 </table>
-<!-- }}} -->
+<%# }}} %>
 
-<!-- {{{ difficulty/terrain combinations -->
+<%# {{{ difficulty/terrain combinations %>
 <table id="difficulty_terrain_combinations" class="c">
   <caption>Difficulty/Terrain Combinations</caption>
   <tr>
@@ -128,9 +128,9 @@
     <td><%= total_finds %></td>
   </tr>
 </table>
-<!-- }}} -->
+<%# }}} %>
 
-<!-- {{{ month/day combinations -->
+<%# {{{ month/day combinations %>
 <table id="month_day_combinations" class="c">
   <caption>Month/Day Combinations</caption>
   <tr>
@@ -157,9 +157,9 @@
     <td><%= total_finds %></td>
   </tr>
 </table>
-<!-- }}} -->
+<%# }}} %>
 
-<!-- {{{ finds by country -->
+<%# {{{ finds by country %>
 <table>
   <caption>Finds by Country</caption>
   <tr>
@@ -175,7 +175,7 @@
     </tr>
   <% } %>
 </table>
-<!-- }}} -->
+<%# }}} %>
 
 </body>
 </html>
