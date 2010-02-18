@@ -19,7 +19,7 @@ module Helpers
   end
 
   def total_archived
-    @caches.select {|c| c.archived }.count
+    @caches.select {|c| c.archived }.size
   end
 
   def days_cached
