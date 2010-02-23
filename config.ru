@@ -1,5 +1,3 @@
-##\ -p 80 -E deployment
-
 require 'rubygems'
 require 'zip/zip'
 require 'lib/mapping'
