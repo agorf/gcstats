@@ -52,8 +52,10 @@ class GCStatsApp
         rhtml = open('stats.rhtml').read
         wpts = Waypoint.parse(data)
         caches = wpts.map {|w| w.cache }
-        tpl = Template.new(rhtml, :wpts => wpts, :caches => caches)
-        res.write tpl
+        html = Template.new(rhtml, :wpts => wpts, :caches => caches).result
+        html.sub!('/* %css% */', "\n" + File.read('stats.css'))
+        html.sub!('/* %js% */', "\n" + File.read('stats.js'))
+        res.write html
       rescue
         res.status = 500
         res.write '<h1>Internal Server Error</h1>'
