@@ -29,13 +29,12 @@ Will write to _agorf.html_.
 
 ## Dependencies ##
 
-[happymapper][] **0.3.0 or greater** for easy XML parsing and [rubyzip][] for reading ZIP files.
+[rubyzip][] for reading ZIP files.
 
 To install, issue:
 
-    sudo gem install happymapper rubyzip
+    sudo gem install rubyzip
 
-[happymapper]: http://happymapper.rubyforge.org/
 [rubyzip]: http://rubyzip.sourceforge.net/
 
 ## License ##

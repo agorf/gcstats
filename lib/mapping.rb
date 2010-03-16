@@ -1,63 +1,140 @@
-require 'rubygems'
-require 'happymapper'
+require 'rexml/document'
 
-GEOCACHING_NS = 'http://www.groundspeak.com/cache/1/0'
+module Caches
+  NS = 'groundspeak'
 
-class Log
-  include HappyMapper
+  def self.from_xml(xml_data)
+    caches = []
+    doc = REXML::Document.new(xml_data)
+    doc.each_element('/gpx/wpt') {|wpt_node|
+      caches << Cache.new(wpt_node)
+    }
+    caches
+  end
 
-  namespace GEOCACHING_NS
-  attribute :id, Integer
-  element :date, DateTime
-  element :type, String
-  element :finder, String, :attributes => { :id => Integer }
-  element :text, String, :attributes => { :encoded => Boolean }
-end
+  class Cache
+    def initialize(wpt_node)
+      @wpt_node = wpt_node
+      @cache_node = wpt_node.elements["#{NS}:cache"]
+    end
 
-class TravelBug
-  include HappyMapper
+    def lat
+      @lat ||= @wpt_node.attributes['lat'].to_f
+    end
 
-  namespace GEOCACHING_NS
-  attribute :id, Integer
-  attribute :ref, String
-  element :name, String
-end
+    alias :latitude :lat
 
-class Cache
-  include HappyMapper
+    def lon
+      @lon ||= @wpt_node.attributes['lon'].to_f
+    end
 
-  namespace GEOCACHING_NS
-  attribute :id, Integer
-  attribute :available, Boolean
-  attribute :archived, Boolean
-  element :name, String
-  element :placed_by, String
-  element :owner, String, :attributes => { :id => Integer }
-  element :type, String
-  element :container, String
-  element :difficulty, Float
-  element :terrain, Float
-  element :country, String
-  element :state, String
-  element :short_description, String, :attributes => { :html => Boolean }
-  element :long_description, String, :attributes => { :html => Boolean }
-  element :encoded_hints, String
-  has_many :logs, Log
-  has_many :travelbugs, TravelBug
-end
+    alias :longitude :lon
 
-class Waypoint
-  include HappyMapper
+    def published
+      @published ||= begin
+        require 'time'
+        Time.parse(@wpt_node.elements['time'].text)
+      end
+    end
 
-  tag 'wpt'
-  attribute :lat, Float
-  attribute :lon, Float
-  element :time, DateTime
-  element :name, String
-  element :desc, String
-  element :url, String
-  element :urlname, String
-  element :sym, String
-  element :type, String
-  has_one :cache, Cache
+    alias :time :published
+
+    def code
+      @code ||= @wpt_node.elements['name'].text
+    end
+
+    def url
+      @url ||= @wpt_node.elements['url'].text
+    end
+
+    def available?
+      @available ||= @cache_node.attributes['available'].to_s.downcase == 'true'
+    end
+
+    def archived?
+      @archived ||= @cache_node.attributes['archived'].to_s.downcase == 'true'
+    end
+
+    def name
+      @name ||= @cache_node.elements["#{NS}:name"].text
+    end
+
+    def owner
+      @owner ||= @cache_node.elements["#{NS}:placed_by"].text
+    end
+
+    alias :placed_by :owner
+
+    def type
+      @type ||= @cache_node.elements["#{NS}:type"].text
+    end
+
+    def container
+      @container ||= @cache_node.elements["#{NS}:container"].text
+    end
+
+    alias :size :container
+
+    def difficulty
+      @difficulty ||= @cache_node.elements["#{NS}:difficulty"].text.to_f
+    end
+
+    def terrain
+      @terrain ||= @cache_node.elements["#{NS}:terrain"].text.to_f
+    end
+
+    def country
+      @country ||= @cache_node.elements["#{NS}:country"].text
+    end
+
+    def state
+      @state ||= @cache_node.elements["#{NS}:state"].text
+    end
+
+    def logs
+      @logs ||= begin
+        logs = []
+
+        @cache_node.each_element("#{NS}:logs/#{NS}:log") {|log_node|
+          logs << Log.new(log_node)
+        }
+
+        logs
+      end
+    end
+
+    def found
+      @found ||= begin
+        date = nil
+
+        logs.each {|log|
+          if log.type.downcase == 'found it' or
+              type.downcase == 'event cache' && log.type.downcase == 'attended'
+            date = log.date
+            break
+          end
+        }
+
+        date
+      end
+    end
+  end
+
+  class Log
+    def initialize(log_node)
+      @log_node = log_node
+    end
+
+    def date
+      @date ||= Date.parse(@log_node.elements["#{NS}:date"].text)
+    end
+
+    def type
+      @type ||= @log_node.elements["#{NS}:type"].text
+    end
+
+    def finder
+      @finder ||= @log_node.elements["#{NS}:finder"].text
+    end
+  end
 end

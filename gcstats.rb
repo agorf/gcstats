@@ -28,9 +28,8 @@ else
 end
 
 rhtml = File.read('gcstats.rhtml')
-wpts = Waypoint.parse(data)
-caches = wpts.map {|w| w.cache }
-html = Template.new(rhtml, :wpts => wpts, :caches => caches).result
+caches = Caches.from_xml(data)
+html = Template.new(rhtml, :caches => caches).result
 html.sub!('/* %css% */', "\n" + File.read('gcstats.css'))
 html.sub!('/* %js% */', "\n" + File.read('gcstats.js'))
 open(out_fn, 'w') {|f| f.write(html) }

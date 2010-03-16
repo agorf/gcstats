@@ -19,7 +19,7 @@ module Helpers
   end
 
   def total_archived
-    @caches.select {|c| c.archived }.size
+    @caches.select {|c| c.archived? }.size
   end
 
   def days_cached
@@ -45,18 +45,11 @@ module Helpers
       finds = {}
 
       @caches.each {|cache|
-        cache.logs.each {|log|
-          if log.type == 'Found it' or
-              cache.type == 'Event Cache' && log.type == 'Attended'
-            date = Date.parse(log.date.to_s)
-
-            begin
-              finds[date] += 1
-            rescue
-              finds[date] = 1
-            end
-          end
-        }
+        begin
+          finds[cache.found] += 1
+        rescue
+          finds[cache.found] = 1
+        end
       }
 
       finds
