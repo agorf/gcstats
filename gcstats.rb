@@ -27,11 +27,11 @@ else
   out_fn ||= File.basename(in_fn, File.extname(in_fn)) + '.html'
 end
 
-rhtml = File.read('stats.rhtml')
+rhtml = File.read('gcstats.rhtml')
 wpts = Waypoint.parse(data)
 caches = wpts.map {|w| w.cache }
 html = Template.new(rhtml, :wpts => wpts, :caches => caches).result
-html.sub!('/* %css% */', "\n" + File.read('stats.css'))
-html.sub!('/* %js% */', "\n" + File.read('stats.js'))
+html.sub!('/* %css% */', "\n" + File.read('gcstats.css'))
+html.sub!('/* %js% */', "\n" + File.read('gcstats.js'))
 open(out_fn, 'w') {|f| f.write(html) }
 puts "wrote #{out_fn}"  if test(?s, out_fn)

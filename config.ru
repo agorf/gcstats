@@ -47,12 +47,12 @@ class GCStatsApp
           data = pq[:tempfile].read
         end
 
-        rhtml = open('stats.rhtml').read
+        rhtml = open('gcstats.rhtml').read
         wpts = Waypoint.parse(data)
         caches = wpts.map {|w| w.cache }
         html = Template.new(rhtml, :wpts => wpts, :caches => caches).result
-        html.sub!('/* %css% */', "\n" + File.read('stats.css'))
-        html.sub!('/* %js% */', "\n" + File.read('stats.js'))
+        html.sub!('/* %css% */', "\n" + File.read('gcstats.css'))
+        html.sub!('/* %js% */', "\n" + File.read('gcstats.js'))
         res.write html
       rescue
         res.status = 500
