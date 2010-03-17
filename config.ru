@@ -3,8 +3,6 @@ require 'zip/zip'
 require 'lib/mapping'
 require 'lib/template'
 
-use Rack::Static, :urls => %w{/stats.css /stats.js}
-
 class GCStatsApp
   def call(env)
     req = Rack::Request.new(env)
