@@ -33,7 +33,7 @@
   </tr>
   <tr>
     <th class="l">Most in one day</th>
-    <td><%= '%d (%s)' % most_finds_in_a_day %></td>
+    <td><%= '%d (%s)' % [most_finds_in_a_day, most_finds_in_a_day_dates.join(', ')] %></td>
   </tr>
 </table>
 <%# }}} %>

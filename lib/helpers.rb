@@ -34,10 +34,11 @@ module Helpers
   end
 
   def most_finds_in_a_day
-    n_finds = finds_by_date.values.max
-    date = finds_by_date.select {|d, f| f == n_finds }.map {|d, f|
-      d.to_s }.sort.join(', ')
-    [n_finds, date]
+    @most_finds_in_a_day ||= finds_by_date.values.max
+  end
+
+  def most_finds_in_a_day_dates
+    finds_by_date.select {|d, f| f == most_finds_in_a_day }.map {|d, f| d }.sort
   end
 
   def finds_by_date
