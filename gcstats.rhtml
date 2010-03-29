@@ -28,6 +28,10 @@
     <td><%= finds_per_day %></td>
   </tr>
   <tr>
+    <th class="l">Days cached</th>
+    <td><%= finds_by_date.keys.size  %></td>
+  </tr>
+  <tr>
     <th class="l">Most in one day</th>
     <td><%= '%d (%s)' % most_finds_in_a_day %></td>
   </tr>
