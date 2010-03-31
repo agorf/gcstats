@@ -71,6 +71,7 @@ if (!GCStats) {
     $(document).ready(function () {
         GCStats.highlight_table($('#finds_by_day_of_week'));
         GCStats.highlight_table($('#finds_by_year'));
+        GCStats.highlight_table($('#finds_by_date'));
         GCStats.highlight_square_table($('#difficulty_terrain_combinations'));
         GCStats.highlight_square_table($('#month_day_combinations'));
     });

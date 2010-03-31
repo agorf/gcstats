@@ -186,5 +186,24 @@
 </table>
 <%# }}} %>
 
+<%# {{{ finds by date %>
+<table id="finds_by_date">
+  <caption>Finds by Date</caption>
+  <tr>
+    <th>Date</th>
+    <th>Finds</th>
+    <th>Days Passed</th>
+  </tr>
+  <% finds_dates.each_with_index {|date, i| %>
+    <% days_passed = (date - (finds_dates[i + 1] || date)).to_i %>
+    <tr>
+      <td><%= date %></td>
+      <td class="finds r"><%= finds_by_date[date] %></td>
+      <td class="r"><%= days_passed == 0 ? '-' : days_passed %></td>
+    </tr>
+  <% } %>
+</table>
+<%# }}} %>
+
 </body>
 </html>

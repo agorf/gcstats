@@ -180,4 +180,8 @@ module Helpers
   def geocacher_name
     @caches[0].logs[0].finder
   end
+
+  def finds_dates
+    @finds_dates ||= finds_by_date.keys.sort.reverse
+  end
 end
