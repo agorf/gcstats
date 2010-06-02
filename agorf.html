@@ -4,9 +4,136 @@
 <head>
   <title>agorf's Geocaching Stats</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <link type="text/css" rel="stylesheet" href="stats.css" media="screen" />
+  <link type="text/css" rel="stylesheet" href="gcstats.css" media="screen" />
+  <style type="text/css">
+body {
+    font-family: sans-serif;
+}
+
+table {
+    margin-bottom: 1em;
+}
+
+caption {
+    font-weight: bold;
+}
+
+th {
+    background-color: #9ab54f;
+    color: #240;
+}
+
+td {
+    background-color: #eee;
+    color: #333;
+}
+
+caption, th, td {
+    padding: 3px 5px;
+}
+
+.l {
+    text-align: left;
+}
+
+.c {
+    text-align: center;
+}
+
+.r {
+    text-align: right;
+}
+
+.hl {
+    background-color: #ddd;
+}
+
+.b {
+    font-weight: bold;
+}
+</style>
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
-  <script type="text/javascript" src="stats.js"></script>
+  <script type="text/javascript" src="gcstats.js"></script>
+  <script type="text/javascript">
+if (!GCStats) {
+    Array.prototype.max = function () {
+        return Math.max.apply(Math, this);
+    };
+
+    Array.prototype.min = function () {
+        return Math.min.apply(Math, this);
+    };
+
+    var GCStats = {
+        highlight_table: function (table) {
+            var finds, finds_max;
+
+            finds = $(table).find('td.finds');
+
+            finds_max = finds.map(function () {
+                return $(this).text() * 1;
+            }).get().max();
+
+            finds.filter(function () {
+                return $(this).text() * 1 === finds_max;
+            }).each(function () {
+                $(this).parent().find('td').addClass('hl b');
+            });
+        },
+        highlight_square_table: function (table) {
+            var total_row, row_max, total_col, col_max, inner_cells, table_max;
+
+            // total row
+            
+            total_row = $(table).find('tr.total td');
+
+            row_max = total_row.slice(0, -1).map(function () {
+                return $(this).text() * 1;
+            }).get().max();
+
+            total_row.addClass('hl').filter(function () {
+                return $(this).text() * 1 === row_max;
+            }).addClass('b');
+
+            total_row.last().addClass('b');
+
+            // total column
+
+            total_col = $(table).find('td.total');
+
+            col_max = total_col.map(function () {
+                return $(this).text() * 1;
+            }).get().max();
+
+            total_col.addClass('hl').filter(function () {
+                return $(this).text() * 1 === col_max;
+            }).addClass('b');
+
+            // inner cells
+
+            inner_cells = $(table).find('td:not(.hl)');
+
+            table_max = inner_cells.filter(function () {
+                return ($(this).text() * 1).toString() === $(this).text();
+            }).map(function () {
+                return $(this).text() * 1;
+            }).get().max();
+
+            inner_cells.filter(function () {
+                return $(this).text() * 1 === table_max;
+            }).addClass('hl b');
+        },
+    };
+
+    $(document).ready(function () {
+        GCStats.highlight_table($('#finds_by_day_of_week'));
+        GCStats.highlight_table($('#finds_by_year'));
+        GCStats.highlight_table($('#finds_by_date'));
+        GCStats.highlight_square_table($('#difficulty_terrain_combinations'));
+        GCStats.highlight_square_table($('#month_day_combinations'));
+    });
+}
+</script>
 </head>
 <body>
 
@@ -14,16 +141,24 @@
 <table>
   <caption>Cache Finds</caption>
   <tr>
+    <th class="l">Geocacher</th>
+    <td class="hl b">agorf</td>
+  </tr>
+  <tr>
     <th class="l">Total</th>
-    <td>33</td>
+    <td>39</td>
   </tr>
   <tr>
     <th class="l">Archived</th>
-    <td>0</td>
+    <td>1</td>
   </tr>
   <tr>
     <th class="l">Caches/Day</th>
-    <td>0.23</td>
+    <td>0.19</td>
+  </tr>
+  <tr>
+    <th class="l">Days cached</th>
+    <td>16</td>
   </tr>
   <tr>
     <th class="l">Most in one day</th>
@@ -50,19 +185,19 @@
     <tr>
       <td>Tue</td>
       <td class="finds r">6</td>
-      <td class="r">18.2%</td>
+      <td class="r">15.4%</td>
     </tr>
   
     <tr>
       <td>Wed</td>
       <td class="finds r">1</td>
-      <td class="r">3.0%</td>
+      <td class="r">2.6%</td>
     </tr>
   
     <tr>
       <td>Thu</td>
-      <td class="finds r">4</td>
-      <td class="r">12.1%</td>
+      <td class="finds r">9</td>
+      <td class="r">23.1%</td>
     </tr>
   
     <tr>
@@ -74,13 +209,13 @@
     <tr>
       <td>Sat</td>
       <td class="finds r">7</td>
-      <td class="r">21.2%</td>
+      <td class="r">17.9%</td>
     </tr>
   
     <tr>
       <td>Sun</td>
-      <td class="finds r">15</td>
-      <td class="r">45.5%</td>
+      <td class="finds r">16</td>
+      <td class="r">41.0%</td>
     </tr>
   
 </table>
@@ -97,14 +232,14 @@
   
     <tr>
       <td>2010</td>
-      <td class="finds r">2</td>
-      <td class="r">6.1%</td>
+      <td class="finds r">8</td>
+      <td class="r">20.5%</td>
     </tr>
   
     <tr>
       <td>2009</td>
       <td class="finds r">31</td>
-      <td class="r">93.9%</td>
+      <td class="r">79.5%</td>
     </tr>
   
 </table>
@@ -121,32 +256,32 @@
   
     <tr>
       <td>Small</td>
-      <td class="r">11</td>
+      <td class="r">13</td>
       <td class="r">33.3%</td>
     </tr>
   
     <tr>
       <td>Regular</td>
-      <td class="r">11</td>
+      <td class="r">13</td>
       <td class="r">33.3%</td>
     </tr>
   
     <tr>
       <td>Micro</td>
-      <td class="r">9</td>
-      <td class="r">27.3%</td>
+      <td class="r">11</td>
+      <td class="r">28.2%</td>
     </tr>
   
     <tr>
       <td>Other</td>
       <td class="r">1</td>
-      <td class="r">3.0%</td>
+      <td class="r">2.6%</td>
     </tr>
   
     <tr>
       <td>Not chosen</td>
       <td class="r">1</td>
-      <td class="r">3.0%</td>
+      <td class="r">2.6%</td>
     </tr>
   
 </table>
@@ -163,26 +298,26 @@
   
     <tr>
       <td>Traditional Cache</td>
-      <td class="r">26</td>
-      <td class="r">78.8%</td>
+      <td class="r">32</td>
+      <td class="r">82.1%</td>
     </tr>
   
     <tr>
       <td>Unknown Cache</td>
       <td class="r">3</td>
-      <td class="r">9.1%</td>
+      <td class="r">7.7%</td>
     </tr>
   
     <tr>
       <td>Multi-cache</td>
       <td class="r">3</td>
-      <td class="r">9.1%</td>
+      <td class="r">7.7%</td>
     </tr>
   
     <tr>
       <td>Event Cache</td>
       <td class="r">1</td>
-      <td class="r">3.0%</td>
+      <td class="r">2.6%</td>
     </tr>
   
 </table>
@@ -218,7 +353,7 @@
     <tr>
       <th>1</th>
       
-        <td>6</td>
+        <td>7</td>
       
         <td>1</td>
       
@@ -226,7 +361,7 @@
       
         <td>0</td>
       
-        <td>0</td>
+        <td>1</td>
       
         <td>0</td>
       
@@ -236,7 +371,7 @@
       
         <td>0</td>
       
-      <td class="total">8</td>
+      <td class="total">10</td>
     </tr>
   
     <tr>
@@ -268,9 +403,9 @@
       
         <td>1</td>
       
-        <td>0</td>
+        <td>1</td>
       
-        <td>6</td>
+        <td>8</td>
       
         <td>3</td>
       
@@ -284,7 +419,7 @@
       
         <td>0</td>
       
-      <td class="total">13</td>
+      <td class="total">16</td>
     </tr>
   
     <tr>
@@ -350,13 +485,13 @@
       
         <td>0</td>
       
-        <td>0</td>
+        <td>1</td>
       
         <td>0</td>
       
         <td>0</td>
       
-      <td class="total">0</td>
+      <td class="total">1</td>
     </tr>
   
     <tr>
@@ -434,25 +569,25 @@
   <tr class="total">
     <th>Total</th>
     
-      <td>11</td>
+      <td>12</td>
     
-      <td>6</td>
+      <td>7</td>
     
-      <td>8</td>
-    
-      <td>3</td>
+      <td>10</td>
     
       <td>3</td>
     
-      <td>1</td>
+      <td>4</td>
     
       <td>1</td>
+    
+      <td>2</td>
     
       <td>0</td>
     
       <td>0</td>
     
-    <td>33</td>
+    <td>39</td>
   </tr>
 </table>
 
@@ -693,7 +828,15 @@
       
         <td>0</td>
       
+        <td>1</td>
+      
         <td>0</td>
+      
+        <td>0</td>
+      
+        <td>0</td>
+      
+        <td>5</td>
       
         <td>0</td>
       
@@ -721,15 +864,7 @@
       
         <td>0</td>
       
-        <td>0</td>
-      
-        <td>0</td>
-      
-        <td>0</td>
-      
-        <td>0</td>
-      
-      <td class="total">0</td>
+      <td class="total">6</td>
     </tr>
   
     <tr>
@@ -1373,7 +1508,7 @@
     
       <td>0</td>
     
-      <td>0</td>
+      <td>1</td>
     
       <td>0</td>
     
@@ -1381,7 +1516,7 @@
     
       <td>0</td>
     
-      <td>2</td>
+      <td>7</td>
     
       <td>0</td>
     
@@ -1409,7 +1544,7 @@
     
       <td>0</td>
     
-    <td>33</td>
+    <td>39</td>
   </tr>
 </table>
 
@@ -1425,8 +1560,132 @@
   
     <tr>
       <td>Greece</td>
-      <td class="r">33</td>
+      <td class="r">39</td>
       <td class="r">100.0%</td>
+    </tr>
+  
+</table>
+
+
+
+<table id="finds_by_date">
+  <caption>Finds by Date</caption>
+  <tr>
+    <th>Date</th>
+    <th>Finds</th>
+    <th>Days Passed</th>
+  </tr>
+  
+    
+    <tr>
+      <td>2010-03-18</td>
+      <td class="finds r">5</td>
+      <td class="r">4</td>
+    </tr>
+  
+    
+    <tr>
+      <td>2010-03-14</td>
+      <td class="finds r">1</td>
+      <td class="r">61</td>
+    </tr>
+  
+    
+    <tr>
+      <td>2010-01-12</td>
+      <td class="finds r">2</td>
+      <td class="r">16</td>
+    </tr>
+  
+    
+    <tr>
+      <td>2009-12-27</td>
+      <td class="finds r">1</td>
+      <td class="r">31</td>
+    </tr>
+  
+    
+    <tr>
+      <td>2009-11-26</td>
+      <td class="finds r">3</td>
+      <td class="r">25</td>
+    </tr>
+  
+    
+    <tr>
+      <td>2009-11-01</td>
+      <td class="finds r">3</td>
+      <td class="r">3</td>
+    </tr>
+  
+    
+    <tr>
+      <td>2009-10-29</td>
+      <td class="finds r">1</td>
+      <td class="r">5</td>
+    </tr>
+  
+    
+    <tr>
+      <td>2009-10-24</td>
+      <td class="finds r">1</td>
+      <td class="r">6</td>
+    </tr>
+  
+    
+    <tr>
+      <td>2009-10-18</td>
+      <td class="finds r">2</td>
+      <td class="r">7</td>
+    </tr>
+  
+    
+    <tr>
+      <td>2009-10-11</td>
+      <td class="finds r">5</td>
+      <td class="r">14</td>
+    </tr>
+  
+    
+    <tr>
+      <td>2009-09-27</td>
+      <td class="finds r">3</td>
+      <td class="r">1</td>
+    </tr>
+  
+    
+    <tr>
+      <td>2009-09-26</td>
+      <td class="finds r">6</td>
+      <td class="r">24</td>
+    </tr>
+  
+    
+    <tr>
+      <td>2009-09-02</td>
+      <td class="finds r">1</td>
+      <td class="r">1</td>
+    </tr>
+  
+    
+    <tr>
+      <td>2009-09-01</td>
+      <td class="finds r">3</td>
+      <td class="r">7</td>
+    </tr>
+  
+    
+    <tr>
+      <td>2009-08-25</td>
+      <td class="finds r">1</td>
+      <td class="r">2</td>
+    </tr>
+  
+    
+    <tr>
+      <td>2009-08-23</td>
+      <td class="finds r">1</td>
+      <td class="r">-</td>
     </tr>
   
 </table>
