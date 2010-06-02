@@ -15,7 +15,7 @@ Assuming your Pocket Query file is _3627915.zip_, issue:
 
     ruby gcstats.rb 3627915.zip
 
-Open _3627915.html_ to view your statistics.  It it also possible to specify the output filename:
+Open _3627915.html_ to view your statistics.  It is also possible to specify the output filename:
 
     ruby gcstats.rb 3627915.zip agorf.html
 
