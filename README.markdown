@@ -2,10 +2,9 @@
 
 A Ruby program that generates HTML statistics of your [Geocaching][gc] activity.
 
-Samples: [my stats][agorf], [yannisp stats][yannisp] (fellow geocacher)
+Sample: [my stats][agorf]
 
 [agorf]: http://agorf.github.com/gcstats/agorf.html
-[yannisp]: http://agorf.github.com/gcstats/yannisp.html
 
 ## Use ##
 
