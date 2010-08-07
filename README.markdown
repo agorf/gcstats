@@ -30,7 +30,7 @@ Will write to _agorf.html_.
 
 To install, issue:
 
-    sudo gem install rubyzip
+    gem install rubyzip
 
 [rubyzip]: http://rubyzip.sourceforge.net/
 
