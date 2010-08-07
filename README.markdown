@@ -7,13 +7,13 @@ A Ruby program that generates simple and clean statistics of your [Geocaching][g
 
 ## Use ##
 
-Visit the [Pocket Queries][pq] page and click the _Add to Queue_ button (under _My Finds_).  Wait a while and check your email: you should have a Pocket Query file emailed to you with your finds.
+Visit the [Pocket Queries][pq] page and click the _Add to Queue_ button (under _My Finds_). After a while, you will receive an email informing you that your Pocket Query file is available for download. Visit the [Pocket Queries][pq] page again and download the file under the _Pocket Queries Ready for Download_ tab.
 
 Assuming your Pocket Query file is _3627915.zip_, issue:
 
     ruby gcstats.rb 3627915.zip
 
-Open _3627915.html_ to view your statistics.  It is also possible to specify the output filename:
+Open _3627915.html_ to view your statistics. It is also possible to specify the output filename:
 
     ruby gcstats.rb 3627915.zip agorf.html
 
