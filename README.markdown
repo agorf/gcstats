@@ -1,9 +1,8 @@
 # gcstats #
 
-A Ruby program that generates HTML statistics of your [Geocaching][gc] activity.
+A Ruby program that generates simple and clean statistics of your [Geocaching][gc] activity in HTML format ([sample][agorf]).
 
-Sample: [my stats][agorf]
-
+[gc]: http://www.geocaching.com/
 [agorf]: http://agorf.github.com/gcstats/agorf.html
 
 ## Use ##
@@ -24,7 +23,6 @@ Will write to _agorf.html_.
 
 [pq]: http://www.geocaching.com/pocket/
 [pm]: https://www.geocaching.com/membership/
-[gc]: http://www.geocaching.com/
 
 ## Dependencies ##
 
