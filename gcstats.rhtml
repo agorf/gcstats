@@ -54,7 +54,7 @@
     <tr>
       <td><%= DAY_NAME[i] %></td>
       <td class="finds r"><%= finds %></td>
-      <td class="r"><%= (finds / total_finds.to_f * 100).round_with_precision(1) %>%</td>
+      <td class="r"><%= (finds / total_finds.to_f * 100).round_p(1) %>%</td>
     </tr>
   <% } %>
 </table>
@@ -72,7 +72,7 @@
     <tr>
       <td><%= year %></td>
       <td class="finds r"><%= finds = finds_by_year[year] %></td>
-      <td class="r"><%= (finds / total_finds.to_f * 100).round_with_precision(1) %>%</td>
+      <td class="r"><%= (finds / total_finds.to_f * 100).round_p(1) %>%</td>
     </tr>
   <% } %>
 </table>
@@ -90,7 +90,7 @@
     <tr>
       <td><%= size %></td>
       <td class="r"><%= finds %></td>
-      <td class="r"><%= (finds / total_finds.to_f * 100).round_with_precision(1) %>%</td>
+      <td class="r"><%= (finds / total_finds.to_f * 100).round_p(1) %>%</td>
     </tr>
   <% } %>
 </table>
@@ -108,7 +108,7 @@
     <tr>
       <td><%= type %></td>
       <td class="r"><%= finds %></td>
-      <td class="r"><%= (finds / total_finds.to_f * 100).round_with_precision(1) %>%</td>
+      <td class="r"><%= (finds / total_finds.to_f * 100).round_p(1) %>%</td>
     </tr>
   <% } %>
 </table>
@@ -184,7 +184,7 @@
     <tr>
       <td><%= country %></td>
       <td class="r"><%= finds %></td>
-      <td class="r"><%= (finds / total_finds.to_f * 100).round_with_precision(1) %>%</td>
+      <td class="r"><%= (finds / total_finds.to_f * 100).round_p(1) %>%</td>
     </tr>
   <% } %>
 </table>

@@ -6,6 +6,8 @@ class Float
       (self * (10 ** precision)).round / (10 ** precision).to_f
     end
   end
+
+  alias :round_p :round_with_precision
 end
 
 module Helpers
@@ -30,7 +32,7 @@ module Helpers
   end
 
   def finds_per_day
-    (total_finds / days_cached.to_f).round_with_precision(2)
+    (total_finds / days_cached.to_f).round_p(2)
   end
 
   def most_finds_in_a_day
