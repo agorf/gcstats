@@ -13,5 +13,5 @@ class Template
     ERB.new(@text).result(binding)
   end
 
-  alias_method :to_s, :result
+  alias :to_s :result
 end
