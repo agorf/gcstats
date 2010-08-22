@@ -1,5 +1,6 @@
 require 'rexml/document'
 require 'date'
+require 'time'
 
 module Caches
   NS = 'groundspeak'
@@ -32,10 +33,7 @@ module Caches
     alias :longitude :lon
 
     def published
-      @published ||= begin
-        require 'time'
-        Time.parse(@wpt_node.elements['time'].text)
-      end
+      @published ||= Time.parse(@wpt_node.elements['time'].text)
     end
 
     alias :time :published
