@@ -1,4 +1,5 @@
 require 'rexml/document'
+require 'date'
 
 module Caches
   NS = 'groundspeak'
