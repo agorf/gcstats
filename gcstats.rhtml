@@ -128,7 +128,7 @@
     <tr>
       <th><%= ((i + 2) / 2.0).to_s.sub('.0', '') %></th>
       <% (0..8).each {|j| %>
-        <td><%= difficulty_terrain_combinations[i][j] %></td>
+        <td><%= (n = difficulty_terrain_combinations[i][j]) == 0 ? '' : n %></td>
       <% } %>
       <td class="total"><%= difficulty_terrain_combinations[i].inject {|a, e| a + e } %></td>
     </tr>
@@ -157,7 +157,7 @@
     <tr>
       <th><%= Date::ABBR_MONTHNAMES[i + 1] %></th>
       <% (0..30).each {|j| %>
-        <td><%= (n = month_day_combinations[i][j]) < 0 ? '-' : n %></td>
+        <td><%= (n = month_day_combinations[i][j]) > 0 ? n : (n < 0 ? '-' : '') %></td>
       <% } %>
       <td class="total"><%= month_day_combinations[i].inject {|a, e| a + [e, 0].max } %></td>
     </tr>
