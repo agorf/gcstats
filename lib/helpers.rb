@@ -1,15 +1,3 @@
-class Float
-  def round_with_precision(precision = nil)
-    if precision.nil?
-      round
-    else
-      (self * (10 ** precision)).round / (10 ** precision).to_f
-    end
-  end
-
-  alias :round_p :round_with_precision
-end
-
 module Helpers
   LEAP_YEAR_MONTH_DAYS = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
   RFC2822_DAY_NAME = %w{Sun Mon Tue Wed Thu Fri Sat} # US, Canada, Japan
@@ -32,7 +20,7 @@ module Helpers
   end
 
   def finds_per_day
-    (total_finds / days_cached.to_f).round_p(2)
+    sprintf('%.2f', total_finds / days_cached.to_f).to_f
   end
 
   def most_finds_in_a_day
