@@ -18,10 +18,7 @@ module GCStats
     end
 
     def total_archived
-      @caches
-        .select {|c| c.archived? }
-        .map {|cache| cache.find_dates.size }
-        .sum
+      @caches.select {|c| c.archived? }.map {|cache| cache.find_dates.size }.sum
     end
 
     def days_cached
