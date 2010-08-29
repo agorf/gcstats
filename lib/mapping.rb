@@ -102,19 +102,18 @@ module Caches
       end
     end
 
-    def found
-      @found ||= begin
-        date = nil
+    def find_dates
+      @find_dates ||= begin
+        dates = []
 
         logs.each {|log|
           if log.type.downcase == 'found it' or
               type.downcase == 'event cache' && log.type.downcase == 'attended'
-            date = log.date
-            break
+            dates << log.date
           end
         }
 
-        date
+        dates
       end
     end
   end

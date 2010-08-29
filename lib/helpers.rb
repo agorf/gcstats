@@ -1,3 +1,9 @@
+class Array
+  def sum
+    inject(0) { |a, b| a + b }
+  end
+end
+
 module Helpers
   LEAP_YEAR_MONTH_DAYS = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
   RFC2822_DAY_NAME = %w{Sun Mon Tue Wed Thu Fri Sat} # US, Canada, Japan
@@ -5,11 +11,16 @@ module Helpers
   DAY_NAME = ISO8601_DAY_NAME
 
   def total_finds
-    @total_finds ||= @caches.size
+    @total_finds ||= begin
+      @caches.map {|cache| cache.find_dates.size }.sum
+    end
   end
 
   def total_archived
-    @caches.select {|c| c.archived? }.size
+    @caches
+      .select {|c| c.archived? }
+      .map {|cache| cache.find_dates.size }
+      .sum
   end
 
   def days_cached
@@ -36,11 +47,13 @@ module Helpers
       finds = {}
 
       @caches.each {|cache|
-        begin
-          finds[cache.found] += 1
-        rescue
-          finds[cache.found] = 1
-        end
+        cache.find_dates.each {|find_date|
+          if finds[find_date]
+            finds[find_date] += 1
+          else
+            finds[find_date] = 1
+          end
+        }
       }
 
       finds
@@ -93,9 +106,9 @@ module Helpers
 
     @caches.each {|cache|
       begin
-        finds[cache.container] += 1
+        finds[cache.container] += cache.find_dates.size
       rescue
-        finds[cache.container] = 1
+        finds[cache.container] = cache.find_dates.size
       end
     }
 
@@ -107,9 +120,9 @@ module Helpers
 
     @caches.each {|cache|
       begin
-        finds[cache.type] += 1
+        finds[cache.type] += cache.find_dates.size
       rescue
-        finds[cache.type] = 1
+        finds[cache.type] = cache.find_dates.size
       end
     }
 
@@ -123,7 +136,7 @@ module Helpers
       @caches.each {|cache|
         i = 2 * (cache.difficulty - 1)
         j = 2 * (cache.terrain - 1)
-        combinations[i][j] += 1
+        combinations[i][j] += cache.find_dates.size
       }
 
       combinations
@@ -157,9 +170,9 @@ module Helpers
 
       @caches.each {|cache|
         begin
-          finds[cache.country] += 1
+          finds[cache.country] += cache.find_dates.size
         rescue
-          finds[cache.country] = 1
+          finds[cache.country] = cache.find_dates.size
         end
       }
 
