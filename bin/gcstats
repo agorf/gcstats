@@ -2,8 +2,8 @@
 
 require 'rubygems'
 require 'zip/zip'
-require './lib/mapping'
-require './lib/template'
+require 'gcstats/mapping'
+require 'gcstats/template'
 
 in_fn, out_fn = ARGV[0..1]
 
@@ -27,10 +27,12 @@ else
   out_fn ||= File.basename(in_fn, File.extname(in_fn)) + '.html'
 end
 
-rhtml = File.read('gcstats.rhtml')
-caches = Caches.from_xml(data)
-html = Template.new(rhtml, :caches => caches).result
-html.sub!('/* %css% */', "\n" + File.read('gcstats.css'))
-html.sub!('/* %js% */', "\n" + File.read('gcstats.js'))
+dir = File.join(File.dirname(__FILE__), "..", "lib", "gcstats")
+
+rhtml = File.read(File.join(dir, 'gcstats.rhtml'))
+caches = GCStats::Caches.from_xml(data)
+html = GCStats::Template.new(rhtml, :caches => caches).result
+html.sub!('/* %css% */', "\n" + File.read(File.join(dir, 'gcstats.css')))
+html.sub!('/* %js% */', "\n" + File.read(File.join(dir, 'gcstats.js')))
 open(out_fn, 'w') {|f| f.write(html) }
 puts "wrote #{out_fn}"  if test(?s, out_fn)

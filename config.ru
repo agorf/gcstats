@@ -1,3 +1,3 @@
-require 'lib/server'
+require 'gcstats/server'
 
 run Sinatra::Application

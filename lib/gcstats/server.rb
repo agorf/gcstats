@@ -1,5 +1,5 @@
-require 'lib/mapping'
-require 'lib/template'
+require 'gcstats/mapping'
+require 'gcstats/template'
 require 'rubygems'
 require 'zip/zip'
 require 'sinatra'
@@ -43,11 +43,13 @@ post '/generate_stats' do
       data = pq[:tempfile].read
     end
 
-    rhtml = open('gcstats.rhtml').read
-    caches = Caches.from_xml(data)
-    html = Template.new(rhtml, :caches => caches).result
-    html.sub!('/* %css% */', "\n" + File.read('gcstats.css'))
-    html.sub!('/* %js% */', "\n" + File.read('gcstats.js'))
+    dir = File.dirname(__FILE__)
+
+    rhtml = open(File.join(dir, 'gcstats.rhtml')).read
+    caches = GCStats::Caches.from_xml(data)
+    html = GCStats::Template.new(rhtml, :caches => caches).result
+    html.sub!('/* %css% */', "\n" + File.read(File.join(dir, 'gcstats.css')))
+    html.sub!('/* %js% */', "\n" + File.read(File.join(dir, 'gcstats.js')))
 
     return html
   rescue
