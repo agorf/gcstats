@@ -1,6 +1,6 @@
 class Array
   def sum
-    inject(0) { |a, b| a + b }
+    inject {|a, e| a + e }
   end
 end
 
@@ -12,13 +12,11 @@ module GCStats
     DAY_NAME = ISO8601_DAY_NAME
 
     def total_finds
-      @total_finds ||= begin
-        @caches.map {|cache| cache.find_dates.size }.sum
-      end
+      @total_finds ||= @caches.map {|c| c.find_dates.size }.sum
     end
 
     def total_archived
-      @caches.select {|c| c.archived? }.map {|cache| cache.find_dates.size }.sum
+      @caches.select {|c| c.archived? }.map {|c| c.find_dates.size }.sum
     end
 
     def days_cached
@@ -46,9 +44,9 @@ module GCStats
 
         @caches.each {|cache|
           cache.find_dates.each {|find_date|
-            if finds[find_date]
+            begin
               finds[find_date] += 1
-            else
+            rescue
               finds[find_date] = 1
             end
           }

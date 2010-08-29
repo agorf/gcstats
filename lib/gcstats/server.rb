@@ -43,13 +43,13 @@ post '/generate_stats' do
       data = pq[:tempfile].read
     end
 
-    dir = File.dirname(__FILE__)
+    lib_dir = File.dirname(__FILE__)
 
-    rhtml = open(File.join(dir, 'gcstats.rhtml')).read
+    rhtml = open(File.join(lib_dir, 'gcstats.rhtml')).read
     caches = GCStats::Caches.from_xml(data)
     html = GCStats::Template.new(rhtml, :caches => caches).result
-    html.sub!('/* %css% */', "\n" + File.read(File.join(dir, 'gcstats.css')))
-    html.sub!('/* %js% */', "\n" + File.read(File.join(dir, 'gcstats.js')))
+    html.sub!('/* %css% */', "\n" + File.read(File.join(lib_dir, 'gcstats.css')))
+    html.sub!('/* %js% */', "\n" + File.read(File.join(lib_dir, 'gcstats.js')))
 
     return html
   rescue

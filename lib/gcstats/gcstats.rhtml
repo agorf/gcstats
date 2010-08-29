@@ -130,13 +130,13 @@
       <% (0..8).each {|j| %>
         <td><%= (n = difficulty_terrain_combinations[i][j]) == 0 ? '' : n %></td>
       <% } %>
-      <td class="total"><%= difficulty_terrain_combinations[i].inject {|a, e| a + e } %></td>
+      <td class="total"><%= difficulty_terrain_combinations[i].sum %></td>
     </tr>
   <% } %>
   <tr class="total">
     <th>Total</th>
     <% (0..8).each {|i| %>
-      <td><%= difficulty_terrain_combinations.inject(0) {|a, e| a + e[i] } %></td>
+      <td><%= difficulty_terrain_combinations.map {|e| e[i] }.sum %></td>
     <% } %>
     <td><%= total_finds %></td>
   </tr>
@@ -159,13 +159,13 @@
       <% (0..30).each {|j| %>
         <td><%= (n = month_day_combinations[i][j]) > 0 ? n : (n < 0 ? '-' : '') %></td>
       <% } %>
-      <td class="total"><%= month_day_combinations[i].inject {|a, e| a + [e, 0].max } %></td>
+      <td class="total"><%= month_day_combinations[i].map {|e| [e, 0].max }.sum %></td>
     </tr>
   <% } %>
   <tr class="total">
     <th>Total</th>
     <% (0..30).each {|i| %>
-      <td><%= month_day_combinations.inject(0) {|a, e| a + [e[i], 0].max } %></td>
+      <td><%= month_day_combinations.map {|e| [e[i], 0].max }.sum %></td>
     <% } %>
     <td><%= total_finds %></td>
   </tr>
