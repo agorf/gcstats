@@ -2,8 +2,8 @@
 
 require 'rubygems'
 require 'zip/zip'
-require 'lib/mapping'
-require 'lib/template'
+require './lib/mapping'
+require './lib/template'
 
 in_fn, out_fn = ARGV[0..1]
 

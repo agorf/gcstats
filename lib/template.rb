@@ -1,5 +1,5 @@
 require 'erb'
-require 'lib/helpers'
+require './lib/helpers'
 
 class Template
   include Helpers
