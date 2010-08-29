@@ -7,6 +7,13 @@ Also available online as a web app: <http://gcstats.heroku.com/>
 [gc]: http://www.geocaching.com/
 [agorf]: http://agorf.github.com/gcstats/agorf.html
 
+## Install ##
+
+To install, change directory to where you have extracted the gcstats source files and issue:
+
+    gem build gcstats.gemspec
+    gem install gcstats-*.gem
+
 ## Use ##
 
 Visit the [Pocket Queries][pq] page and click the _Add to Queue_ button (under _My Finds_). After a while, you will receive an email informing you that your Pocket Query file is available for download. Visit the [Pocket Queries][pq] page again and download the file under the _Pocket Queries Ready for Download_ tab.
@@ -26,16 +33,6 @@ Will write to _agorf.html_.
 [pq]: http://www.geocaching.com/pocket/
 [pm]: https://www.geocaching.com/membership/
 
-## Dependencies ##
-
-[rubyzip][] for reading ZIP files.
-
-To install, issue:
-
-    gem install rubyzip
-
-[rubyzip]: http://rubyzip.sourceforge.net/
-
 ## License ##
 
 (The MIT License)
@@ -50,4 +47,4 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 ## Author ##
 
-Aggelos Orfanakos, <http://agorf.gr/>
+[Aggelos Orfanakos](http://agorf.gr/), with contributions from [Thomas Cyron](http://thcyron.de/).
