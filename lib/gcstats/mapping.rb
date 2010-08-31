@@ -88,7 +88,7 @@ module GCStats
       end
 
       def state
-        @state ||= @cache_node.elements["#{NS}:state"].text
+        @state ||= @cache_node.elements["#{NS}:state"].text.strip
       end
 
       def logs

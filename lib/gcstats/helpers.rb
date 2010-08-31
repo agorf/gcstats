@@ -181,6 +181,8 @@ module GCStats
         finds = {}
 
         @caches.each {|cache|
+          next if cache.state.empty?
+
           begin
             finds[cache.state] += cache.find_dates.size
           rescue
