@@ -206,7 +206,7 @@ module GCStats
           end
         }
 
-        finds.sort {|a, b| b[1] <=> a[1] }[0..9]
+        finds.sort {|x, y| y[1] <=> x[1] }[0..9]
       end
     end
 
