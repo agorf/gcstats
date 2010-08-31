@@ -176,6 +176,22 @@ module GCStats
       end
     end
 
+    def finds_by_state
+      @finds_by_state ||= begin
+        finds = {}
+
+        @caches.each {|cache|
+          begin
+            finds[cache.state] += cache.find_dates.size
+          rescue
+            finds[cache.state] = cache.find_dates.size
+          end
+        }
+
+        finds
+      end
+    end
+
     def geocacher_name
       @caches[0].logs[0].finder
     end

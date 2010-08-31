@@ -190,6 +190,24 @@
 </table>
 <%# }}} %>
 
+<%# {{{ finds by state %>
+<table>
+  <caption>Finds by State</caption>
+  <tr>
+    <th>State</th>
+    <th>Finds</th>
+    <th>Percentage</th>
+  </tr>
+  <% finds_by_state.sort {|x, y| y[1] <=> x[1] }.each {|state, finds| %>
+    <tr>
+      <td><%= state %></td>
+      <td class="r"><%= finds %></td>
+      <td class="r"><%= '%.1f' % (finds / total_finds.to_f * 100) %>%</td>
+    </tr>
+  <% } %>
+</table>
+<%# }}} %>
+
 <%# {{{ finds by date %>
 <table id="finds_by_date">
   <caption>Finds by Date</caption>
