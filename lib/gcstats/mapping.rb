@@ -60,10 +60,12 @@ module GCStats
       end
 
       def owner
-        @owner ||= @cache_node.elements["#{NS}:placed_by"].text
+        @owner ||= @cache_node.elements["#{NS}:owner"].text
       end
 
-      alias :placed_by :owner
+      def placed_by
+        @placed_by ||= @cache_node.elements["#{NS}:placed_by"].text
+      end
 
       def type
         @type ||= @cache_node.elements["#{NS}:type"].text
