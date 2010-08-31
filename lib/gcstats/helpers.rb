@@ -194,6 +194,22 @@ module GCStats
       end
     end
 
+    def finds_by_owner
+      @finds_by_owner ||= begin
+        finds = {}
+
+        @caches.each {|cache|
+          begin
+            finds[cache.owner] += cache.find_dates.size
+          rescue
+            finds[cache.owner] = cache.find_dates.size
+          end
+        }
+
+        finds.sort {|a, b| b[1] <=> a[1] }[0..9]
+      end
+    end
+
     def geocacher_name
       @caches[0].logs[0].finder
     end

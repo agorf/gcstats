@@ -114,6 +114,24 @@
 </table>
 <%# }}} %>
 
+<%# {{{ finds by cache owner %>
+<table>
+  <caption>Finds by Cache Owner</caption>
+  <tr>
+    <th>Owner</th>
+    <th>Finds</th>
+    <th>Percentage</th>
+  </tr>
+  <% finds_by_owner.each {|(owner, finds)| %>
+    <tr>
+      <td><%= owner %></td>
+      <td class="r"><%= finds %></td>
+      <td class="r"><%= '%.1f' % (finds / total_finds.to_f * 100) %>%</td>
+    </tr>
+  <% } %>
+</table>
+<%# }}} %>
+
 <%# {{{ difficulty/terrain combinations %>
 <table id="difficulty_terrain_combinations" class="c">
   <caption>Difficulty/Terrain Combinations</caption>
