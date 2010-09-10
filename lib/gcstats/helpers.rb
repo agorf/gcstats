@@ -183,11 +183,9 @@ module GCStats
         @caches.each {|cache|
           next if cache.state.empty?
 
-          begin
-            finds[cache.state] += cache.find_dates.size
-          rescue
-            finds[cache.state] = cache.find_dates.size
-          end
+          finds[cache.country] ||= {}
+          finds[cache.country][cache.state] ||= 0
+          finds[cache.country][cache.state] += cache.find_dates.size
         }
 
         finds

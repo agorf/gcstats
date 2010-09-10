@@ -209,21 +209,28 @@
 <%# }}} %>
 
 <%# {{{ finds by state %>
-<table>
-  <caption>Finds by State</caption>
-  <tr>
-    <th>State</th>
-    <th>Finds</th>
-    <th>Percentage</th>
-  </tr>
-  <% finds_by_state.sort {|x, y| y[1] <=> x[1] }.each {|state, finds| %>
+<% finds_by_state.each {|country, states| %>
+  <table>
+    <caption>Finds by State in <%= country %></caption>
     <tr>
-      <td><%= state %></td>
-      <td class="r"><%= finds %></td>
-      <td class="r"><%= '%.1f' % (finds / total_finds.to_f * 100) %>%</td>
+      <th rowspan="2">State</th>
+      <th rowspan="2">Finds</th>
+      <th colspan="2">Percentage</th>
     </tr>
-  <% } %>
-</table>
+    <tr>
+      <th>Country</th>
+      <th>Total</th>
+    </tr>
+    <% states.sort {|x, y| y[1] <=> x[1] }.each {|state, finds| %>
+      <tr>
+        <td><%= state %></td>
+        <td class="r"><%= finds %></td>
+        <td class="r"><%= '%.1f' % (finds / states.map {|s| s[1] }.sum.to_f * 100) %>%</td>
+        <td class="r"><%= '%.1f' % (finds / total_finds.to_f * 100) %>%</td>
+      </tr>
+    <% } %>
+  </table>
+<% } %>
 <%# }}} %>
 
 <%# {{{ finds by date %>
