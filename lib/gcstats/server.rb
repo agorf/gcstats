@@ -28,6 +28,8 @@ end
 
 post '/generate_stats' do
   begin
+    start_ts = Time.new # for render_time helper
+
     pq = params['pq']
 
     if pq[:type] == 'application/zip'
@@ -47,7 +49,8 @@ post '/generate_stats' do
 
     rhtml = open(File.join(lib_dir, 'gcstats.rhtml')).read
     caches = GCStats::Caches.from_xml(data)
-    html = GCStats::Template.new(rhtml, :caches => caches).result
+    data = {:caches => caches, :start_ts => start_ts}
+    html = GCStats::Template.new(rhtml, data).result
     html.sub!('/* %css% */', "\n" + File.read(File.join(lib_dir, 'gcstats.css')))
     html.sub!('/* %js% */', "\n" + File.read(File.join(lib_dir, 'gcstats.js')))
 

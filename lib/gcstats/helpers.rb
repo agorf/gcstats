@@ -215,5 +215,9 @@ module GCStats
     def finds_dates
       @finds_dates ||= finds_by_date.keys.sort.reverse
     end
+
+    def render_time
+      Time.new - @start_ts
+    end
   end
 end

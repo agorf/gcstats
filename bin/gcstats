@@ -12,6 +12,8 @@ if in_fn.nil?
   exit 1
 end
 
+start_ts = Time.new # for render_time helper
+
 if File.extname(in_fn) == '.zip'
   data = nil
 
@@ -31,7 +33,8 @@ lib_dir = File.join(File.dirname(__FILE__), '..', 'lib', 'gcstats')
 
 rhtml = File.read(File.join(lib_dir, 'gcstats.rhtml'))
 caches = GCStats::Caches.from_xml(data)
-html = GCStats::Template.new(rhtml, :caches => caches).result
+data = {:caches => caches, :start_ts => start_ts}
+html = GCStats::Template.new(rhtml, data).result
 html.sub!('/* %css% */', "\n" + File.read(File.join(lib_dir, 'gcstats.css')))
 html.sub!('/* %js% */', "\n" + File.read(File.join(lib_dir, 'gcstats.js')))
 open(out_fn, 'w') {|f| f.write(html) }
