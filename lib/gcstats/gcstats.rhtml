@@ -221,11 +221,12 @@
       <th>Country</th>
       <th>Total</th>
     </tr>
+    <% country_finds = states.map {|s| s[1] }.sum %>
     <% states.sort {|x, y| y[1] <=> x[1] }.each {|state, finds| %>
       <tr>
         <td><%= state %></td>
         <td class="r"><%= finds %></td>
-        <td class="r"><%= '%.1f' % (finds / states.map {|s| s[1] }.sum.to_f * 100) %>%</td>
+        <td class="r"><%= '%.1f' % (finds / country_finds.to_f * 100) %>%</td>
         <td class="r"><%= '%.1f' % (finds / total_finds.to_f * 100) %>%</td>
       </tr>
     <% } %>
