@@ -2,7 +2,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-  <title>Geocaching Stats for <%= geocacher_name %></title>
+  <title>Geocaching Stats for <%=h geocacher_name %></title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <link type="text/css" rel="stylesheet" href="gcstats.css" media="screen" />
   <style type="text/css">/* %css% */</style>
@@ -17,7 +17,7 @@
   <caption>Cache Finds</caption>
   <tr>
     <th class="l">Geocacher</th>
-    <td class="hl b"><%= geocacher_name %></td>
+    <td class="hl b"><%=h geocacher_name %></td>
   </tr>
   <tr>
     <th class="l">Total</th>
@@ -88,7 +88,7 @@
   </tr>
   <% finds_by_size.each {|size, finds| %>
     <tr>
-      <td><%= size %></td>
+      <td><%=h size %></td>
       <td class="r"><%= finds %></td>
       <td class="r"><%= '%.1f' % (finds / total_finds.to_f * 100) %>%</td>
     </tr>
@@ -106,7 +106,7 @@
   </tr>
   <% finds_by_type.each {|type, finds| %>
     <tr>
-      <td><%= type %></td>
+      <td><%=h type %></td>
       <td class="r"><%= finds %></td>
       <td class="r"><%= '%.1f' % (finds / total_finds.to_f * 100) %>%</td>
     </tr>
@@ -124,7 +124,7 @@
   </tr>
   <% finds_by_owner.each {|owner, finds| %>
     <tr>
-      <td><%= owner %></td>
+      <td><%=h owner %></td>
       <td class="r"><%= finds %></td>
       <td class="r"><%= '%.1f' % (finds / total_finds.to_f * 100) %>%</td>
     </tr>
@@ -200,7 +200,7 @@
   </tr>
   <% finds_by_country.sort {|x, y| y[1] <=> x[1] }.each {|country, finds| %>
     <tr>
-      <td><%= country %></td>
+      <td><%=h country %></td>
       <td class="r"><%= finds %></td>
       <td class="r"><%= '%.1f' % (finds / total_finds.to_f * 100) %>%</td>
     </tr>
@@ -211,7 +211,7 @@
 <%# {{{ finds by state %>
 <% finds_by_state.each {|country, states| %>
   <table>
-    <caption>Finds by State in <%= country %></caption>
+    <caption>Finds by State in <%=h country %></caption>
     <tr>
       <th rowspan="2">State</th>
       <th rowspan="2">Finds</th>
@@ -224,7 +224,7 @@
     <% country_finds = states.map {|s| s[1] }.sum %>
     <% states.sort {|x, y| y[1] <=> x[1] }.each {|state, finds| %>
       <tr>
-        <td><%= state %></td>
+        <td><%=h state %></td>
         <td class="r"><%= finds %></td>
         <td class="r"><%= '%.1f' % (finds / country_finds.to_f * 100) %>%</td>
         <td class="r"><%= '%.1f' % (finds / total_finds.to_f * 100) %>%</td>

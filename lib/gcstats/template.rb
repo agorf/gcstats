@@ -14,6 +14,10 @@ module GCStats
       ERB.new(@text).result(binding)
     end
 
+    def h(s)
+      ERB::Util.html_escape(s)
+    end
+
     alias :to_s :result
   end
 end
