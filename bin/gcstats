@@ -29,13 +29,13 @@ else
   out_fn ||= File.basename(in_fn, File.extname(in_fn)) + '.html'
 end
 
-lib_dir = File.join(File.dirname(__FILE__), '..', 'lib', 'gcstats')
+libdir = File.join(File.dirname(__FILE__), '..', 'lib', 'gcstats')
 
-rhtml = File.read(File.join(lib_dir, 'gcstats.rhtml'))
+rhtml = File.read(File.join(libdir, 'gcstats.rhtml'))
 caches = GCStats::Caches.from_xml(data)
 data = {:caches => caches, :start_ts => start_ts}
 html = GCStats::Template.new(rhtml, data).result
-html.sub!('/* %css% */', "\n" + File.read(File.join(lib_dir, 'gcstats.css')))
-html.sub!('/* %js% */', "\n" + File.read(File.join(lib_dir, 'gcstats.js')))
+html.sub!('/* %css% */', "\n" + File.read(File.join(libdir, 'gcstats.css')))
+html.sub!('/* %js% */', "\n" + File.read(File.join(libdir, 'gcstats.js')))
 open(out_fn, 'w') {|f| f.write(html) }
 puts "wrote #{out_fn}"  if test(?s, out_fn)
