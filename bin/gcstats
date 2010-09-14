@@ -37,5 +37,14 @@ data = {:caches => caches, :start_ts => start_ts}
 html = GCStats::Template.new(rhtml, data).result
 html.sub!('/* %css% */', "\n" + File.read(File.join(libdir, 'gcstats.css')))
 html.sub!('/* %js% */', "\n" + File.read(File.join(libdir, 'gcstats.js')))
+
+if ARGV[1].nil? && caches[0] && caches[0].logs[0]
+  out_fn = caches[0].logs[0].finder
+  out_fn.downcase!
+  out_fn.gsub!(/\W/, '-')
+  out_fn.gsub!(/-+/, '-')
+  out_fn += '.html'
+end
+
 open(out_fn, 'w') {|f| f.write(html) }
-puts "wrote #{out_fn}"  if test(?s, out_fn)
+puts "wrote #{out_fn}" if test(?s, out_fn)

@@ -18,15 +18,17 @@ To install, change directory to where you have extracted the gcstats source file
 
 Visit the [Pocket Queries][pq] page and click the _Add to Queue_ button (under _My Finds_). After a while, you will receive an email informing you that your Pocket Query file is available for download. Visit the [Pocket Queries][pq] page again and download the file under the _Pocket Queries Ready for Download_ tab.
 
-Assuming your Pocket Query file is _3627915.zip_, issue:
+Assuming your Pocket Query file is _1234567.zip_, issue:
 
-    ruby gcstats.rb 3627915.zip
+    gcstats 1234567.zip
 
-Open _3627915.html_ to view your statistics. It is also possible to specify the output filename:
+This will write to _username.html_, where "username" is the one you have on [Geocaching.com][gc].
 
-    ruby gcstats.rb 3627915.zip agorf.html
+It is also possible to specify the output filename:
 
-Will write to _agorf.html_.
+    gcstats 1234567.zip mystats.html
+
+This will write to _mystats.html_.
 
 **Note:** You need to be a [Premium Member][pm] at [Geocaching.com][gc] to use [Pocket Queries][pq].
 
