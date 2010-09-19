@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.email       = 'agorf@agorf.gr'
   s.homepage    = 'http://github.com/agorf/gcstats'
 
-  s.files       = Dir['README.markdown', 'config.ru', 'bin/gcstats', 'lib/**/*']
+  s.files       = Dir['README.md', 'config.ru', 'bin/gcstats', 'lib/**/*']
   s.executables = ['gcstats']
 
   s.add_dependency 'rubyzip'
