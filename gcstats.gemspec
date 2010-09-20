@@ -1,6 +1,10 @@
+$LOAD_PATH.unshift('lib')
+
+require 'gcstats/version'
+
 Gem::Specification.new do |s|
   s.name        = 'gcstats'
-  s.version     = '1.0.0'
+  s.version     = GCStats::VERSION
   s.summary     = 'Simple and clean statistics of your Geocaching activity'
   s.description = 'Simple and clean statistics of your Geocaching activity'
 
