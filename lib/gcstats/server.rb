@@ -1,6 +1,5 @@
 require 'gcstats/mapping'
 require 'gcstats/template'
-require 'rubygems'
 require 'zip/zip'
 require 'sinatra'
 

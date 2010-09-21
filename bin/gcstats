@@ -1,6 +1,5 @@
 #!/usr/bin/env ruby
 
-require 'rubygems'
 require 'zip/zip'
 require 'gcstats/mapping'
 require 'gcstats/template'
