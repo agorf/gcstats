@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 require 'zip/zip'
-require 'gcstats/mapping'
+require 'gcstats/caches'
 require 'gcstats/template'
 
 in_fn, out_fn = ARGV[0..1]
