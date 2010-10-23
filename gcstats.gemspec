@@ -1,5 +1,3 @@
-$LOAD_PATH.unshift('lib')
-
 require 'gcstats/version'
 
 Gem::Specification.new do |s|
