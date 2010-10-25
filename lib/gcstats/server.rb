@@ -7,23 +7,23 @@ module GCStats
   module Server
     get '/' do
       %{\
-    <html>
-      <head>
-        <title>gcstats</title>
-        <style type="text/css">body { font-family: sans-serif; }</style>
-      </head>
-      <body>
-        <form enctype="multipart/form-data" action="/generate_stats" method="post">
-          <label for="pq">Pocket Query (.zip or .gpx):</label>
-          <input type="file" id="pq" name="pq" />
-          <input type="submit" value="Generate Stats" />
-        </form>
-        <a href="http://github.com/agorf/gcstats"><img
-          style="position: absolute; top: 0; right: 0; border: 0;"
-          src="http://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png"
-          alt="Fork me on GitHub" /></a>
-      </body>
-    </html>
+<html>
+  <head>
+    <title>gcstats</title>
+    <style type="text/css">body { font-family: sans-serif; }</style>
+  </head>
+  <body>
+    <form enctype="multipart/form-data" action="/generate_stats" method="post">
+      <label for="pq">Pocket Query (.zip or .gpx):</label>
+      <input type="file" id="pq" name="pq" />
+      <input type="submit" value="Generate Stats" />
+    </form>
+    <a href="http://github.com/agorf/gcstats"><img
+      style="position: absolute; top: 0; right: 0; border: 0;"
+      src="http://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png"
+      alt="Fork me on GitHub" /></a>
+  </body>
+</html>
     }
     end
 
