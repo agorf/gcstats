@@ -46,14 +46,14 @@ module GCStats
           data = pq[:tempfile].read
         end
 
-        libdir = File.dirname(__FILE__)
+        datadir = File.join(File.dirname(__FILE__), '..', '..', 'data', 'gcstats')
 
-        rhtml = open(File.join(libdir, 'gcstats.rhtml')).read
+        rhtml = open(File.join(datadir, 'gcstats.rhtml')).read
         caches = GCStats::Caches.from_xml(data)
         data = {:caches => caches, :start_ts => start_ts}
         html = GCStats::Template.new(rhtml, data).result
-        html.sub!('/* %css% */', "\n" + File.read(File.join(libdir, 'gcstats.css')))
-        html.sub!('/* %js% */', "\n" + File.read(File.join(libdir, 'gcstats.js')))
+        html.sub!('/* %css% */', "\n" + File.read(File.join(datadir, 'gcstats.css')))
+        html.sub!('/* %js% */', "\n" + File.read(File.join(datadir, 'gcstats.js')))
 
         return html
       rescue
