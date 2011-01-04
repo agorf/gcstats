@@ -40,15 +40,11 @@ module GCStats
 
     def finds_by_date
       @finds_by_date ||= begin
-        finds = {}
+        finds = Hash.new(0)
 
         @caches.each {|cache|
           cache.find_dates.each {|find_date|
-            begin
-              finds[find_date] += 1
-            rescue
-              finds[find_date] = 1
-            end
+            finds[find_date] += 1
           }
         }
 
@@ -66,11 +62,7 @@ module GCStats
           wday = date.wday
         end
 
-        begin
-          finds[wday] += finds_on_date
-        rescue
-          finds[wday] = finds_on_date
-        end
+        finds[wday] += finds_on_date
       }
 
       finds
@@ -78,19 +70,15 @@ module GCStats
 
     def finds_by_year
       @finds_by_year ||= begin
-        finds = {}
+        finds = Hash.new(0)
 
         finds_by_date.each {|date, finds_on_date|
-          begin
-            finds[date.year] += finds_on_date
-          rescue
-            finds[date.year] = finds_on_date
-          end
+          finds[date.year] += finds_on_date
         }
 
-        # fill empty years with 0
+        # fill empty inner years with 0
         (finds.keys.min + 1...finds.keys.max).each {|year|
-          finds[year] ||= 0
+          finds[year] = [0, finds[year]].max
         }
 
         finds
@@ -98,28 +86,20 @@ module GCStats
     end
 
     def finds_by_size
-      finds = {}
+      finds = Hash.new(0)
 
       @caches.each {|cache|
-        begin
-          finds[cache.container] += cache.find_dates.size
-        rescue
-          finds[cache.container] = cache.find_dates.size
-        end
+        finds[cache.container] += cache.find_dates.size
       }
 
       finds.sort {|x, y| y[1] <=> x[1] }
     end
 
     def finds_by_type
-      finds = {}
+      finds = Hash.new(0)
 
       @caches.each {|cache|
-        begin
-          finds[cache.type] += cache.find_dates.size
-        rescue
-          finds[cache.type] = cache.find_dates.size
-        end
+        finds[cache.type] += cache.find_dates.size
       }
 
       finds.sort {|x, y| y[1] <=> x[1] }
@@ -162,14 +142,10 @@ module GCStats
 
     def finds_by_country
       @finds_by_country ||= begin
-        finds = {}
+        finds = Hash.new(0)
 
         @caches.each {|cache|
-          begin
-            finds[cache.country] += cache.find_dates.size
-          rescue
-            finds[cache.country] = cache.find_dates.size
-          end
+          finds[cache.country] += cache.find_dates.size
         }
 
         finds
@@ -194,14 +170,10 @@ module GCStats
 
     def finds_by_owner
       @finds_by_owner ||= begin
-        finds = {}
+        finds = Hash.new(0)
 
         @caches.each {|cache|
-          begin
-            finds[cache.owner] += cache.find_dates.size
-          rescue
-            finds[cache.owner] = cache.find_dates.size
-          end
+          finds[cache.owner] += cache.find_dates.size
         }
 
         finds.sort {|x, y| y[1] <=> x[1] }[0..9]
