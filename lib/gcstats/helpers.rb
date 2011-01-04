@@ -108,7 +108,7 @@ module GCStats
         end
       }
 
-      finds.to_a.sort {|x, y| y[1] <=> x[1] }
+      finds.sort {|x, y| y[1] <=> x[1] }
     end
 
     def finds_by_type
@@ -122,7 +122,7 @@ module GCStats
         end
       }
 
-      finds.to_a.sort {|x, y| y[1] <=> x[1] }
+      finds.sort {|x, y| y[1] <=> x[1] }
     end
 
     def difficulty_terrain_combinations
