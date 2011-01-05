@@ -54,7 +54,7 @@
     <tr>
       <td><%= DAY_NAME[i] %></td>
       <td class="finds r"><%= finds %></td>
-      <td class="r"><%= '%.1f' % (finds / total_finds.to_f * 100) %>%</td>
+      <td class="r"><%= format_percent(finds, total_finds) %></td>
     </tr>
   <% } %>
 </table>
@@ -72,7 +72,7 @@
     <tr>
       <td><%= year %></td>
       <td class="finds r"><%= finds = finds_by_year[year] %></td>
-      <td class="r"><%= '%.1f' % (finds / total_finds.to_f * 100) %>%</td>
+      <td class="r"><%= format_percent(finds, total_finds) %></td>
     </tr>
   <% } %>
 </table>
@@ -90,7 +90,7 @@
     <tr>
       <td><%=h size %></td>
       <td class="r"><%= finds %></td>
-      <td class="r"><%= '%.1f' % (finds / total_finds.to_f * 100) %>%</td>
+      <td class="r"><%= format_percent(finds, total_finds) %></td>
     </tr>
   <% } %>
 </table>
@@ -108,7 +108,7 @@
     <tr>
       <td><%=h type %></td>
       <td class="r"><%= finds %></td>
-      <td class="r"><%= '%.1f' % (finds / total_finds.to_f * 100) %>%</td>
+      <td class="r"><%= format_percent(finds, total_finds) %></td>
     </tr>
   <% } %>
 </table>
@@ -126,7 +126,7 @@
     <tr>
       <td><%=h owner %></td>
       <td class="r"><%= finds %></td>
-      <td class="r"><%= '%.1f' % (finds / total_finds.to_f * 100) %>%</td>
+      <td class="r"><%= format_percent(finds, total_finds) %></td>
     </tr>
   <% } %>
 </table>
@@ -202,7 +202,7 @@
     <tr>
       <td><%=h country %></td>
       <td class="r"><%= finds %></td>
-      <td class="r"><%= '%.1f' % (finds / total_finds.to_f * 100) %>%</td>
+      <td class="r"><%= format_percent(finds, total_finds) %></td>
     </tr>
   <% } %>
 </table>
@@ -226,8 +226,8 @@
       <tr>
         <td><%=h state %></td>
         <td class="r"><%= finds %></td>
-        <td class="r"><%= '%.1f' % (finds / country_finds.to_f * 100) %>%</td>
-        <td class="r"><%= '%.1f' % (finds / total_finds.to_f * 100) %>%</td>
+        <td class="r"><%= format_percent(finds, country_finds) %></td>
+        <td class="r"><%= format_percent(finds, total_finds) %></td>
       </tr>
     <% } %>
   </table>

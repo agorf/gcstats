@@ -191,5 +191,9 @@ module GCStats
     def render_time
       Time.new - @start_ts
     end
+
+    def format_percent(value, total, precision = 1)
+      '%.*f%%' % [precision, value / total.to_f * 100]
+    end
   end
 end
