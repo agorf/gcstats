@@ -25,7 +25,7 @@
   </tr>
   <tr>
     <th class="l">Archived</th>
-    <td><%= total_archived %></td>
+    <td><%= '%d (%s)' % [total_archived, format_percent(total_archived, total_finds)] %></td>
   </tr>
   <tr>
     <th class="l">Caches/Day</th>
