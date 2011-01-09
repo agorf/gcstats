@@ -39,6 +39,20 @@
     <th class="l">Most in one day</th>
     <td><%= '%d (%s)' % [most_finds_in_a_day, most_finds_in_a_day_dates.join(', ')] %></td>
   </tr>
+  <tr>
+    <th class="l">Oldest cache</th>
+    <td>
+      <a href="<%=h oldest_cache_found.url %>"><%=h oldest_cache_found.name %></a>
+      (<%=h oldest_cache_found.published.strftime('%Y-%m-%d') %>)
+    </td>
+  </tr>
+  <tr>
+    <th class="l">Newest cache</th>
+    <td>
+      <a href="<%=h newest_cache_found.url %>"><%=h newest_cache_found.name %></a>
+      (<%=h oldest_cache_found.published.strftime('%Y-%m-%d') %>)
+    </td>
+  </tr>
 </table>
 <%# }}} %>
 

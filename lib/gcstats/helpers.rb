@@ -180,6 +180,14 @@ module GCStats
       end
     end
 
+    def oldest_cache_found
+      @oldest_cache_found ||= @caches.sort {|a, b| a.published <=> b.published }.first
+    end
+
+    def newest_cache_found
+      @newest_cache_found ||= @caches.sort {|a, b| a.published <=> b.published }.last
+    end
+
     def geocacher_name
       @caches[0].logs[0].finder
     end
