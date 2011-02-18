@@ -1,12 +1,6 @@
 require 'spec_helper'
 
 describe Caches do
-  let(:xml_data) {
-    open(File.join(*%w{spec fixtures 3627915.gpx})).read
-  }
-
-  let(:caches) { Caches.from_xml(xml_data) }
-
   describe 'caches' do
     subject { caches }
 
