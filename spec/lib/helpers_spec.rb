@@ -1,38 +1,26 @@
 require 'spec_helper'
 
-include Helpers
+module Helpers
+  extend self
+  @caches = caches
+  @start_ts = Time.now
+end
 
 describe Helpers do
-  before do
-    @caches = caches
-  end
+  its(:total_finds) { should == 40 }
 
-  it 'should return total finds' do
-    total_finds.should == 40
-  end
+  its(:total_archived) { should == 1 }
 
-  it 'should return total finds with archived caches' do
-    total_archived.should == 1
-  end
+  its(:days_cached) { should == 267 }
 
-  it 'should return number of days cached' do
-    days_cached.should == 267
-  end
+  its(:finds_per_day) { should == 0.15 }
 
-  it 'should return finds per day' do
-    finds_per_day.should == 0.15
-  end
+  its(:most_finds_in_a_day) { should == 6 }
 
-  it 'should return most finds in a day' do
-    most_finds_in_a_day.should == 6
-  end
+  its(:most_finds_in_a_day_dates) { should == [Date.parse('2009-09-26')] }
 
-  it 'should return dates with most finds in a day' do
-    most_finds_in_a_day_dates.should == [Date.parse('2009-09-26')]
-  end
-
-  it 'should return finds by date' do
-    finds_by_date.should == Hash[
+  its(:finds_by_date) do
+    should == Hash[
       *[
         '2010-05-17', 1,
         '2009-10-18', 2,
@@ -57,16 +45,12 @@ describe Helpers do
     ]
   end
 
-  it 'should return finds by day of week' do
-    finds_by_day_of_week.should == [1, 6, 1, 9, 0, 7, 16]
-  end
+  its(:finds_by_day_of_week) { should == [1, 6, 1, 9, 0, 7, 16] }
 
-  it 'should return finds by year' do
-    finds_by_year.should == {2009 => 31, 2010 => 9}
-  end
+  its(:finds_by_year) { should == {2009 => 31, 2010 => 9} }
 
-  it 'should return finds by size' do
-    finds_by_size.should == [
+  its(:finds_by_size) do
+    should == [
       ['Small', 13],
       ['Regular', 13],
       ['Micro', 12],
@@ -75,8 +59,8 @@ describe Helpers do
     ]
   end
 
-  it 'should return finds by type' do
-    finds_by_type.should == [
+  its(:finds_by_type) do
+    should == [
       ['Traditional Cache', 33],
       ['Unknown Cache', 3],
       ['Multi-cache', 3],
@@ -84,8 +68,8 @@ describe Helpers do
     ]
   end
 
-  it 'should return number of finds in difficulty/terrain combinations' do
-    difficulty_terrain_combinations.should == [
+  its(:difficulty_terrain_combinations) do
+    should == [
       [7, 1, 1, 0, 1, 0, 0, 0, 0],
       [5, 3, 0, 0, 0, 0, 0, 0, 0],
       [1, 1, 8, 3, 2, 1, 0, 0, 0],
@@ -98,8 +82,8 @@ describe Helpers do
     ]
   end
 
-  it 'should return number of finds in month/day combinations' do
-    month_day_combinations.should == [
+  its(:month_day_combinations) do
+    should == [
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  0,  0],
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1],
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  0,  0],
@@ -115,16 +99,12 @@ describe Helpers do
     ]
   end
 
-  it 'should return finds by country' do
-    finds_by_country.should == {'Greece' => 40}
-  end
+  its(:finds_by_country) { should == {'Greece' => 40} }
 
-  it 'should return finds by state' do
-    finds_by_state.should be_empty
-  end
+  its(:finds_by_state) { should be_empty }
 
-  it 'should return finds by cache owner' do
-    finds_by_owner.should == [
+  its(:finds_by_owner) do
+    should == [
       ['yiannisp', 9],
       ['teokar', 8],
       ['tetras61', 7],
@@ -138,12 +118,10 @@ describe Helpers do
     ]
   end
 
-  it 'should return geocacher name' do
-    geocacher_name.should == 'agorf'
-  end
+  its(:geocacher_name) { should == 'agorf' }
 
-  it 'should return dates of finds in descending order' do
-    finds_dates.should == [
+  its(:finds_dates) do
+    should == [
       '2010-05-17',
       '2010-03-18',
       '2010-03-14',
@@ -165,20 +143,20 @@ describe Helpers do
   end
 
   it 'should return render time' do
-    @start_ts = Time.now
-    Time.should_receive(:now).and_return(@start_ts + 10)
-    render_time.should == 10.0
+    start_ts = Helpers.instance_variable_get('@start_ts')
+    Time.should_receive(:now).and_return(start_ts + 10)
+    subject.render_time.should == 10.0
   end
 
   it 'should format percent with default precision 1' do
-    format_percent(3, 9).should == '33.3%'
+    subject.format_percent(3, 9).should == '33.3%'
   end
 
   it 'should format percent with precision 0' do
-    format_percent(3, 9, 0).should == '33%'
+    subject.format_percent(3, 9, 0).should == '33%'
   end
 
   it 'should format percent with precision 2 (>1)' do
-    format_percent(3, 9, 2).should == '33.33%'
+    subject.format_percent(3, 9, 2).should == '33.33%'
   end
 end
