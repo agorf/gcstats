@@ -189,7 +189,7 @@ module GCStats
     end
 
     def render_time
-      Time.new - @start_ts
+      Time.now - @start_ts
     end
 
     def format_percent(value, total, precision = 1)

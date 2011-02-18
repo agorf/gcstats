@@ -1,4 +1,4 @@
-%w{caches template}.each {|f| require "gcstats/#{f}" }
+%w{caches helpers template}.each {|f| require "gcstats/#{f}" }
 
 include GCStats
 
