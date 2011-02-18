@@ -11,6 +11,7 @@ Gem::Specification.new do |s|
   s.homepage    = 'http://github.com/agorf/gcstats'
 
   s.files       = Dir['README.md', 'bin/gcstats', 'lib/**/*']
+  s.test_files  = Dir['spec/**/*']
   s.executables = ['gcstats']
 
   s.add_dependency 'rubyzip'
