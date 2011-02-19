@@ -27,7 +27,7 @@ if (!GCStats) {
             var total_row, row_max, total_col, col_max, inner_cells, table_max;
 
             // total row
-            
+
             total_row = $(table).find('tr.total td');
 
             row_max = total_row.slice(0, -1).map(function () {
