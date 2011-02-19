@@ -22,7 +22,7 @@ module GCStats
     def days_cached
       @days_cached ||= begin
         dates = finds_by_date.keys.sort
-        (dates[-1] - dates[0]).to_i
+        (dates.last - dates.first).to_i
       end
     end
 
@@ -189,7 +189,7 @@ module GCStats
     end
 
     def geocacher_name
-      @caches[0].logs[0].finder
+      @caches.first.logs.first.finder
     end
 
     def finds_dates
