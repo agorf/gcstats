@@ -92,7 +92,7 @@ module GCStats
         finds[cache.container] += cache.find_dates.size
       }
 
-      finds.sort {|x, y| y[1] <=> x[1] }
+      finds.sort {|a, b| b[1] <=> a[1] }
     end
 
     def finds_by_type
@@ -102,7 +102,7 @@ module GCStats
         finds[cache.type] += cache.find_dates.size
       }
 
-      finds.sort {|x, y| y[1] <=> x[1] }
+      finds.sort {|a, b| b[1] <=> a[1] }
     end
 
     def difficulty_terrain_combinations
@@ -176,7 +176,7 @@ module GCStats
           finds[cache.owner] += cache.find_dates.size
         }
 
-        finds.sort {|x, y| y[1] <=> x[1] }[0..9]
+        finds.sort {|a, b| b[1] <=> a[1] }[0..9]
       end
     end
 

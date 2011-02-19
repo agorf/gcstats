@@ -212,7 +212,7 @@
     <th>Finds</th>
     <th>Percentage</th>
   </tr>
-  <% finds_by_country.sort {|x, y| y[1] <=> x[1] }.each {|country, finds| %>
+  <% finds_by_country.sort {|a, b| b[1] <=> a[1] }.each {|country, finds| %>
     <tr>
       <td><%=h country %></td>
       <td class="r"><%= finds %></td>
@@ -236,7 +236,7 @@
       <th>Total</th>
     </tr>
     <% country_finds = states.map {|s| s[1] }.sum %>
-    <% states.sort {|x, y| y[1] <=> x[1] }.each {|state, finds| %>
+    <% states.sort {|a, b| b[1] <=> a[1] }.each {|state, finds| %>
       <tr>
         <td><%=h state %></td>
         <td class="r"><%= finds %></td>
