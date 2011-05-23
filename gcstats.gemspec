@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.email       = 'agorf@agorf.gr'
   s.homepage    = 'http://github.com/agorf/gcstats'
 
-  s.files       = Dir['README.md', 'bin/gcstats', 'lib/**/*']
+  s.files       = Dir['README.md', 'bin/gcstats', 'lib/**/*', 'data/**/*']
   s.test_files  = Dir['spec/**/*']
   s.executables = ['gcstats']
 
