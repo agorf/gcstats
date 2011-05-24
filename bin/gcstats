@@ -24,7 +24,7 @@ if File.extname(in_fn) == '.zip'
     end
   }
 else
-  data = (in_fn == "-") ? $stdin.read : File.read(in_fn)
+  data = (in_fn == '-') ? $stdin.read : File.read(in_fn)
   out_fn ||= File.basename(in_fn, File.extname(in_fn)) + '.html'
 end
 
