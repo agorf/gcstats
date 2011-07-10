@@ -56,6 +56,33 @@
 </table>
 <%# }}} %>
 
+<%# {{{ milestones %>
+<table class="highlight">
+  <caption>Milestones</caption>
+  <tr>
+    <th>Milestone</th>
+    <th>Date</th>
+    <th>Days Passed</th>
+    <th>Cache</th>
+  </tr>
+  <% milestones.each_with_index {|milestone, i| %>
+    <tr>
+      <td><%= milestone[:milestone] %></td>
+
+      <td><%= milestone[:log].date.strftime("%Y-%m-%d") %></td>
+      <td class="r">
+        <% if i == 0 %>
+          —
+        <% else %>
+          <%= (milestone[:log].date - milestones[i - 1][:log].date).to_i %>
+        <% end %>
+      </td>
+      <td><a href="<%=h milestone[:cache].url %>"><%=h milestone[:cache].name %></a></td>
+    </tr>
+  <% } %>
+</table>
+<%# }}} %>
+
 <%# {{{ finds by day of week %>
 <table class="highlight">
   <caption>Finds by Day of Week</caption>

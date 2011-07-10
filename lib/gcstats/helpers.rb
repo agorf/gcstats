@@ -188,6 +188,40 @@ module GCStats
       @newest_cache_found ||= @caches.sort {|a, b| a.published <=> b.published }.last
     end
 
+    def milestones
+      @milestones ||= begin
+        milestones = []
+        milestone = 1
+
+        logs = @caches.map {|cache|
+          cache.logs.map {|log|
+            [cache, log]
+          }
+        }.flatten(1).select {|cache, log|
+          ['found it', 'attended'].include?(log.type.downcase)
+        }.sort {|a, b|
+          a.last.id <=> b.last.id
+        }
+
+        while logs[milestone - 1]
+          milestones << {
+            :milestone => milestone,
+            :cache     => logs[milestone - 1][0],
+            :log       => logs[milestone - 1][1]
+          }
+
+          milestone += case milestone
+            when 1 then 49
+            when 2..99 then 50
+            when 100..499 then 100
+            else 500
+          end
+        end
+
+        milestones
+      end
+    end
+
     def geocacher_name
       @caches.first.logs.first.finder
     end

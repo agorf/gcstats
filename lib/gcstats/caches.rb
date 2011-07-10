@@ -126,6 +126,10 @@ module GCStats
         @log_node = log_node
       end
 
+      def id
+        @id ||= @log_node.attributes["id"].to_i
+      end
+
       def date
         @date ||= Date.parse(@log_node.elements["#{NS}:date"].text)
       end
