@@ -23,8 +23,10 @@ if File.extname(in_fn) == '.zip'
       break
     end
   }
+elsif in_fn == '-'
+  data = $stdin.read
 else
-  data = (in_fn == '-') ? $stdin.read : File.read(in_fn)
+  data = File.read(in_fn)
   out_fn ||= File.basename(in_fn, File.extname(in_fn)) + '.html'
 end
 
@@ -45,5 +47,9 @@ if ARGV[1].nil? && caches[0] && caches[0].logs[0]
   out_fn += '.html'
 end
 
-open(out_fn, 'w') {|f| f.write(html) }
-puts "wrote #{out_fn}" if test(?s, out_fn)
+if out_fn.nil?
+  print html
+else
+  open(out_fn, 'w') {|f| f.write(html) }
+  puts "wrote #{out_fn}" if test(?s, out_fn)
+end
