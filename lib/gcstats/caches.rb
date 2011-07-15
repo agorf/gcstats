@@ -107,16 +107,7 @@ module GCStats
 
       def find_dates
         @find_dates ||= begin
-          dates = []
-
-          logs.each {|log|
-            if log.type.downcase == 'found it' or
-                type.downcase == 'event cache' && log.type.downcase == 'attended'
-              dates << log.date
-            end
-          }
-
-          dates
+          logs.select {|log| log.found? }.map {|log| log.date }
         end
       end
     end
@@ -140,6 +131,10 @@ module GCStats
 
       def finder
         @finder ||= @log_node.elements["#{NS}:finder"].text
+      end
+
+      def found?
+        ['found it', 'attended'].include?(self.type.downcase)
       end
     end
   end

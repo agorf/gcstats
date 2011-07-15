@@ -196,7 +196,7 @@ module GCStats
         logs = @caches.map {|cache|
           cache.logs.map {|log| [cache, log] }
         }.flatten(1).select {|cache, log|
-          ['found it', 'attended'].include?(log.type.downcase)
+          log.found?
         }.sort {|a, b|
           a.last.id <=> b.last.id
         }
