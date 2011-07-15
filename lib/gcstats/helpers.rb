@@ -194,9 +194,7 @@ module GCStats
         milestone = 1
 
         logs = @caches.map {|cache|
-          cache.logs.map {|log|
-            [cache, log]
-          }
+          cache.logs.map {|log| [cache, log] }
         }.flatten(1).select {|cache, log|
           ['found it', 'attended'].include?(log.type.downcase)
         }.sort {|a, b|

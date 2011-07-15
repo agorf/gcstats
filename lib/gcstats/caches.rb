@@ -127,7 +127,7 @@ module GCStats
       end
 
       def id
-        @id ||= @log_node.attributes["id"].to_i
+        @id ||= @log_node.attributes['id'].to_i
       end
 
       def date
