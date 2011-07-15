@@ -235,5 +235,9 @@ module GCStats
     def format_percent(value, total, precision = 1)
       '%.*f%%' % [precision, value / total.to_f * 100]
     end
+
+    def link_to_cache(cache)
+      %{<a href="#{h(cache.url)}">#{h(cache.name)}</a>}
+    end
   end
 end

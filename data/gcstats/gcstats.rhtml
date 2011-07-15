@@ -42,14 +42,14 @@
   <tr>
     <th class="l">Oldest cache</th>
     <td>
-      <a href="<%=h oldest_cache_found.url %>"><%=h oldest_cache_found.name %></a>
+      <%= link_to_cache oldest_cache_found %>
       (<%=h oldest_cache_found.published.strftime('%Y-%m-%d') %>)
     </td>
   </tr>
   <tr>
     <th class="l">Newest cache</th>
     <td>
-      <a href="<%=h newest_cache_found.url %>"><%=h newest_cache_found.name %></a>
+      <%= link_to_cache newest_cache_found %>
       (<%=h newest_cache_found.published.strftime('%Y-%m-%d') %>)
     </td>
   </tr>
@@ -70,7 +70,7 @@
       <td><%= milestone[:milestone] %></td>
       <td><%= milestone[:log].date.strftime('%Y-%m-%d') %></td>
       <td class="r"><%= i == 0 ? '-' : (milestone[:log].date - milestones[i - 1][:log].date).to_i %>
-      <td><a href="<%=h milestone[:cache].url %>"><%=h milestone[:cache].name %></a></td>
+      <td><%= link_to_cache milestone[:cache] %></td>
     </tr>
   <% } %>
 </table>
