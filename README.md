@@ -9,9 +9,8 @@ Also available online as a web app: <http://gcstats.heroku.com/>
 
 ## Install ##
 
-To install, change directory to where you have extracted the gcstats source files and issue:
+From [RubyGems.org](http://rubygems.org/gems/gcstats):
 
-    gem build gcstats.gemspec
     gem install gcstats
 
 ## Use ##
