@@ -11,8 +11,6 @@ if in_fn.nil?
   exit 1
 end
 
-start_ts = Time.new # for render_time helper
-
 if File.extname(in_fn) == '.zip'
   data = nil
 
@@ -30,12 +28,11 @@ else
   out_fn ||= File.basename(in_fn, File.extname(in_fn)) + '.html'
 end
 
+start_ts = Time.now # for render_time helper
 datadir = File.join(File.dirname(__FILE__), '..', 'data', 'gcstats')
-
 rhtml = File.read(File.join(datadir, 'gcstats.rhtml'))
 caches = GCStats::Caches.from_xml(data)
-data = {:caches => caches, :start_ts => start_ts}
-html = GCStats::Template.new(rhtml, data).result
+html = GCStats::Template.new(rhtml, :caches => caches, :start_ts => start_ts).result
 html.sub!('/* %css% */', "\n" + File.read(File.join(datadir, 'gcstats.css')))
 html.sub!('/* %js% */', "\n" + File.read(File.join(datadir, 'gcstats.js')))
 
