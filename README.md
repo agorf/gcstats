@@ -15,30 +15,25 @@ From [RubyGems.org](http://rubygems.org/gems/gcstats):
 
 ## Use ##
 
-Visit the [Pocket Queries][pq] page and click the _Add to Queue_ button (under _My Finds_). After a while, you will receive an email informing you that your Pocket Query file is available for download. Visit the [Pocket Queries][pq] page again and download the file under the _Pocket Queries Ready for Download_ tab.
+Visit the [Pocket Queries][pq] page and click the _Add to Queue_ button (under _My Finds_). After a while, you will receive an email informing you that your Pocket Query file is available for download. Visit the [Pocket Queries][pq] page again and download the file under the _Pocket Queries Ready for Download_ tab. Alternatively, you can use [pqdl][] to download your Pocket Query file from the command line.
 
 Assuming your Pocket Query file is _1234567.zip_, issue:
 
-    gcstats 1234567.zip
-
-This will write to _username.html_, where "username" is the one you have on [Geocaching.com][gc].
-
-It is also possible to specify the output filename:
-
     gcstats 1234567.zip mystats.html
 
-This will write to _mystats.html_.
+This will write your statistics to _mystats.html_.
 
 **Note:** You need to be a [Premium Member][pm] at [Geocaching.com][gc] to use [Pocket Queries][pq].
 
 [pq]: http://www.geocaching.com/pocket/
+[pqdl]: https://github.com/nano/pqdl
 [pm]: https://www.geocaching.com/membership/
 
 ## License ##
 
 (The MIT License)
 
-Copyright (c) 2010 Aggelos Orfanakos
+Copyright (c) 2010-2011 Aggelos Orfanakos
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
