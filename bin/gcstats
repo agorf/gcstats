@@ -3,29 +3,33 @@
 require 'zip/zip'
 require 'gcstats/caches'
 require 'gcstats/template'
+require 'gcstats/version'
 
-in_fn, out_fn = ARGV[0..1]
-
-if in_fn.nil?
-  $stderr.puts "usage: #$0 <infile> [outfile]"
-  exit 1
+if %w{-h --help}.include?(ARGV[0])
+  $stderr.puts "usage: #$0 [infile] [outfile]"
+  exit
 end
 
-if File.extname(in_fn) == '.zip'
-  data = nil
+if %w{-V --version}.include?(ARGV[0])
+  $stderr.puts "gcstats #{GCStats::VERSION}"
+  exit
+end
 
-  Zip::ZipFile.foreach(in_fn) {|entry|
+in_fn = ARGV[0] || '-'
+out_fn = ARGV[1] || '-'
+
+if in_fn == '-'
+  data = $stdin.read
+  exit if data.empty?
+elsif File.extname(in_fn) == '.zip'
+  Zip::ZipFile.foreach(in_fn) do |entry|
     if File.extname(entry.name) == '.gpx'
       data = entry.get_input_stream.read
-      out_fn ||= File.basename(entry.name, '.gpx') + '.html'
       break
     end
-  }
-elsif in_fn == '-'
-  data = $stdin.read
-else
+  end
+else # assume .gpx
   data = File.read(in_fn)
-  out_fn ||= File.basename(in_fn, File.extname(in_fn)) + '.html'
 end
 
 start_ts = Time.now # for render_time helper
@@ -36,17 +40,9 @@ html = GCStats::Template.new(rhtml, :caches => caches, :start_ts => start_ts).re
 html.sub!('/* %css% */', "\n" + File.read(File.join(datadir, 'gcstats.css')))
 html.sub!('/* %js% */', "\n" + File.read(File.join(datadir, 'gcstats.js')))
 
-if ARGV[1].nil? && caches[0] && caches[0].logs[0]
-  out_fn = caches[0].logs[0].finder
-  out_fn.downcase!
-  out_fn.gsub!(/\W/, '-')
-  out_fn.gsub!(/-+/, '-')
-  out_fn += '.html'
-end
-
-if out_fn.nil?
+if out_fn == '-'
   print html
 else
   open(out_fn, 'w') {|f| f.write(html) }
-  puts "wrote #{out_fn}" if test(?s, out_fn)
+  $stderr.puts "wrote #{out_fn}" if test(?s, out_fn)
 end
