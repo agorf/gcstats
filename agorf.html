@@ -84,7 +84,7 @@ if (!GCStats) {
             var total_row, row_max, total_col, col_max, inner_cells, table_max;
 
             // total row
-            
+
             total_row = $(table).find('tr.total td');
 
             row_max = total_row.slice(0, -1).map(function () {
@@ -126,11 +126,13 @@ if (!GCStats) {
     };
 
     $(document).ready(function () {
-        GCStats.highlight_table($('#finds_by_day_of_week'));
-        GCStats.highlight_table($('#finds_by_year'));
-        GCStats.highlight_table($('#finds_by_date'));
-        GCStats.highlight_square_table($('#difficulty_terrain_combinations'));
-        GCStats.highlight_square_table($('#month_day_combinations'));
+        $('table.highlight:not(.square)').each(function () {
+          GCStats.highlight_table(this);
+        });
+
+        $('table.highlight.square').each(function () {
+          GCStats.highlight_square_table(this);
+        });
     });
 }
 </script>
@@ -150,7 +152,7 @@ if (!GCStats) {
   </tr>
   <tr>
     <th class="l">Archived</th>
-    <td>1</td>
+    <td>1 (2.5%)</td>
   </tr>
   <tr>
     <th class="l">Caches/Day</th>
@@ -164,11 +166,45 @@ if (!GCStats) {
     <th class="l">Most in one day</th>
     <td>6 (2009-09-26)</td>
   </tr>
+  <tr>
+    <th class="l">Oldest cache</th>
+    <td>
+      <a href="http://www.geocaching.com/seek/cache_details.aspx?guid=da011f9e-40fc-4b67-9de4-b56e1836ddbf">Meteora</a>
+      (2003-07-18)
+    </td>
+  </tr>
+  <tr>
+    <th class="l">Newest cache</th>
+    <td>
+      <a href="http://www.geocaching.com/seek/cache_details.aspx?guid=6504a539-a0c2-480d-b46f-10efe53725e4">Ioannina lake</a>
+      (2010-05-16)
+    </td>
+  </tr>
 </table>
 
 
 
-<table id="finds_by_day_of_week">
+<table class="highlight">
+  <caption>Milestones</caption>
+  <tr>
+    <th>Milestone</th>
+    <th>Date</th>
+    <th>Days Passed</th>
+    <th>Cache</th>
+  </tr>
+  
+    <tr>
+      <td>1</td>
+      <td>2009-08-23</td>
+      <td class="r">-
+      <td><a href="http://www.geocaching.com/seek/cache_details.aspx?guid=0104b2b6-5cc7-401c-8589-8055a5e30306">Karababa castle</a></td>
+    </tr>
+  
+</table>
+
+
+
+<table class="highlight">
   <caption>Finds by Day of Week</caption>
   <tr>
     <th>Day</th>
@@ -222,7 +258,7 @@ if (!GCStats) {
 
 
 
-<table id="finds_by_year">
+<table class="highlight">
   <caption>Finds by Year</caption>
   <tr>
     <th>Year</th>
@@ -396,7 +432,7 @@ if (!GCStats) {
 
 
 
-<table id="difficulty_terrain_combinations" class="c">
+<table class="c highlight square">
   <caption>Difficulty/Terrain Combinations</caption>
   <tr>
     <th>D/T</th>
@@ -665,7 +701,7 @@ if (!GCStats) {
 
 
 
-<table id="month_day_combinations" class="c">
+<table class="c highlight square">
   <caption>Month/Day Combinations</caption>
   <tr>
     <th>M/D</th>
@@ -1644,7 +1680,7 @@ if (!GCStats) {
 
 
 
-<table id="finds_by_date">
+<table class="highlight">
   <caption>Finds by Date</caption>
   <tr>
     <th>Date</th>
@@ -1774,7 +1810,7 @@ if (!GCStats) {
 </table>
 
 
-<p>Generated with <a href="http://github.com/agorf/gcstats">gcstats</a> on Mon Sep 13 19:20:48 +0300 2010 in 0.848 seconds.</p>
+<p>Generated with <a href="http://github.com/agorf/gcstats">gcstats 1.0.4</a> on Sat Jul 23 11:49:40 +0300 2011 in 1.022 seconds.</p>
 
 </body>
 </html>
