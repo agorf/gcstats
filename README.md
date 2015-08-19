@@ -2,8 +2,6 @@
 
 A Ruby program that generates simple and clean statistics of your [Geocaching][gc] activity in HTML format ([sample][agorf]).
 
-Also available online as a web app: <http://gcstats.herokuapp.com/>
-
 [gc]: http://www.geocaching.com/
 [agorf]: http://agorf.github.com/gcstats/agorf.html
 
